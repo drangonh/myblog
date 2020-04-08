@@ -1,7 +1,8 @@
 import React from 'react';
-import '../../styles/home/index.scss';
+import './index.scss';
 import Header from "../../components/common/Header";
 import BaseComponent from "../../components/common/BaseComponent";
+import ListItem from "../../components/home/ListItem";
 
 class App extends BaseComponent {
     constructor(props) {
@@ -12,6 +13,13 @@ class App extends BaseComponent {
         return (
             <div className="App">
                 <Header/>
+                <div className={"homeContent"}>
+                    <ListItem/>
+                    <ListItem/>
+                    <ListItem/>
+                    <ListItem/>
+                </div>
+
             </div>
         );
     }

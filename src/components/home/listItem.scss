@@ -1,0 +1,39 @@
+@import "../../styles/common";
+
+//box-shadow:x  y blur  spread  color  inset;
+/*
+x:设置水平阴影的位置(X轴),可以使用负值;（必须）
+y:设置垂直阴影的位置(y轴),可以使用负值;（必须）
+blur:设置阴影模糊半径;(可选)
+spread:扩展半径,设置阴影的尺寸;（可选）
+color:设置阴影的颜色;（可选）
+inset:这个参数默认不设置.默认情况下为外阴影,inset表示内阴影.（可选）
+*/
+
+.homeList {
+  height: 8rem;
+  width: 400px;
+  border-color: #EEE;
+  border-width: 1px;
+  border-style: solid;
+  background-color: transparent;
+  margin-top: 50px;
+  border-radius: 10px;
+  box-shadow: #EEE -20px 20px 10px 5px;//边框内阴影
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeTitle{
+  font-family: $fontFamily;
+  font-size: $fontCommon;
+  margin-bottom: 20px;
+}
+
+.homeContent{
+  font-family: $fontFamily;
+  font-size: $fontMin;
+}
+

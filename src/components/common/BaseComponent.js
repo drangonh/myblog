@@ -7,12 +7,8 @@ class BaseComponent extends React.Component {
     }
 
     render() {
-        const {render} = this.props;
         return (
-            <div>
-                <Header/>
-                {render && render()}
-            </div>
+            <Header/>
         );
     }
 }
