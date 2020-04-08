@@ -291,7 +291,7 @@
     "@babel/helper-create-class-features-plugin" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
 
-"@babel/plugin-proposal-decorators@7.8.3":
+"@babel/plugin-proposal-decorators@7.8.3", "@babel/plugin-proposal-decorators@^7.8.3":
   version "7.8.3"
   resolved "https://registry.npm.taobao.org/@babel/plugin-proposal-decorators/download/@babel/plugin-proposal-decorators-7.8.3.tgz#2156860ab65c5abf068c3f67042184041066543e"
   integrity sha1-IVaGCrZcWr8GjD9nBCGEBBBmVD4=
@@ -6771,6 +6771,23 @@ mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@~0.5.1:
   integrity sha1-2Rzv1i0UNsoPQWIOJRKI1CAJne8=
   dependencies:
     minimist "^1.2.5"
+
+mobx-react-lite@2:
+  version "2.0.4"
+  resolved "https://registry.npm.taobao.org/mobx-react-lite/download/mobx-react-lite-2.0.4.tgz#bc38c9dfb56918d2d39588324d1ce1e3a649fb66"
+  integrity sha1-vDjJ37VpGNLTlYgyTRzh46ZJ+2Y=
+
+mobx-react@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.npm.taobao.org/mobx-react/download/mobx-react-6.2.1.tgz#2f2cf7be2e9f9b4661a31cec3b70b8116b1ebeff"
+  integrity sha1-Lyz3vi6fm0ZhoxzsO3C4EWsevv8=
+  dependencies:
+    mobx-react-lite "2"
+
+mobx@^5.15.4:
+  version "5.15.4"
+  resolved "https://registry.npm.taobao.org/mobx/download/mobx-5.15.4.tgz#9da1a84e97ba624622f4e55a0bf3300fb931c2ab"
+  integrity sha1-naGoTpe6YkYi9OVaC/MwD7kxwqs=
 
 move-concurrently@^1.0.1:
   version "1.0.1"
