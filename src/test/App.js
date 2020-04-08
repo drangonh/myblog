@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../logo.svg';
-import './App.css';
+import './App.scss';
 import {observer, inject} from 'mobx-react';
 
 // inject 在模块内用 @inject('test')，将 test 注入到 props 上,保证结构的一致性

@@ -66,3 +66,19 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+### sass变量使用
+* sass中使用map
+```
+$fontMax: (
+   fontSize:20px
+);
+ ```
+ 
+```angular2html
+.App-header {
+  font-size: map_get($fontMax,fontSize);
+  color: white;
+}
+```
