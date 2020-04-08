@@ -1,7 +1,8 @@
-import React,{lazy} from 'react';
+import React, {lazy} from 'react';
 import logo from '../../logo.svg';
 import '../../styles/common/header.scss';
 import {observer, inject} from 'mobx-react';
+import header from "../../store/header";
 
 // const person = lazy(import("../../static/image/person.png"))
 
@@ -10,25 +11,29 @@ import {observer, inject} from 'mobx-react';
 // 当状态变化时，组件也会做相应的更新。
 
 // 观察者
-@inject('test')
+@inject('header')
 @observer
 class Header extends React.Component {
     constructor(props) {
         super(props);
     }
 
+    changeName = () => {
+        const {header} = this.props;
+        header.changeAge(3)
+    };
+
     render() {
-        const {test} = this.props;
-        console.log(test)
+        const {header: {person}} = this.props;
         return (
             <div className="header">
-                <div className={"left"}>
+                <div className={"left"} onClick={this.changeName}>
                     <img
                         className={"person"}
-                        src={require("../../static/image/person.png")}
+                        src={person.img}
                     />
 
-                    <p className={"name"}>姓名</p>
+                    <p className={"name"}>{person.name}</p>
                 </div>
 
                 <div className={"right"}>
