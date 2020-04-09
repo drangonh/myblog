@@ -9,8 +9,13 @@ class ListItem extends React.Component {
     render() {
         return (
             <div className="homeList">
-                <div className={"homeTitle"}>Javascript学习记录</div>
-                <div className={"homeContent"}>学习最新的语法</div>
+                <p className={"homeTitle"}>
+                    Edit <code>src/App.js</code> and save to reload.
+                </p>
+
+                <p className={"homeTitle"}>
+                    Edit <code>src/App.js</code> and save to reload.
+                </p>
             </div>
         );
     }

@@ -1,5 +1,4 @@
 @import "../../styles/common";
-
 //box-shadow:x  y blur  spread  color  inset;
 /*
 x:设置水平阴影的位置(X轴),可以使用负值;（必须）
@@ -13,27 +12,26 @@ inset:这个参数默认不设置.默认情况下为外阴影,inset表示内阴�
 .homeList {
   height: 8rem;
   width: 400px;
-  //border-color: #EEE;
-  //border-width: 1px;
-  //border-style: solid;
-  //background-color: transparent;
-  //margin-bottom: 50px;
-  //border-radius: 10px;
-  //box-shadow: #EEE -20px 20px 10px 5px;//边框内阴影
-  //display: flex;
-  //flex-direction: column;
-  //align-items: center;
-  //justify-content: center;
+  border-color: #EEE;
+  border-width: 1px;
+  border-style: solid;
+  background-color: transparent;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: #EEE -20px 20px 10px 5px;//边框内阴影
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .homeTitle{
   font-family: $fontFamily;
   font-size: $fontCommon;
-  margin-bottom: 20px;
+  margin: 5px 0px;
 }
 
 .homeContent{
-  font-family: $fontFamily;
-  font-size: $fontMin;
+  font-size: $fontCommon;
 }
-
