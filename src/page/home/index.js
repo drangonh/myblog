@@ -3,6 +3,7 @@ import './index.scss';
 import Header from "../../components/common/Header";
 import BaseComponent from "../../components/common/BaseComponent";
 import ListItem from "../../components/home/ListItem";
+import SuspendBtn from "../../components/home/SuspendBtn";
 
 class App extends BaseComponent {
     constructor(props) {
@@ -22,6 +23,7 @@ class App extends BaseComponent {
                     <ListItem/>
                 </div>
 
+                <SuspendBtn/>
             </div>
         );
     }

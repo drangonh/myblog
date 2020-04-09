@@ -1,0 +1,21 @@
+@import "../../styles/common";
+
+.suspendBtn {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  background-color: cornsilk;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.btnTitle{
+  color: antiquewhite;
+  font-family: $fontFamily;
+  font-size: $fontMax;
+}
