@@ -106,3 +106,7 @@ $fontMax: (
 }
 ```
 
+### react-router
+* 默认是hash模式：.../#/...;To B
+* H5 server模式，需要后端处理；TO C
+
