@@ -76,9 +76,33 @@ $fontMax: (
 );
  ```
  
-```angular2html
+```
 .App-header {
   font-size: map_get($fontMax,fontSize);
   color: white;
 }
 ```
+
+### flex布局中设置宽度高度被压缩
+* 这个问题是应为flex-shrink默认值为1，当宽或者高显示不下的时候就会压缩组件的宽或者高。
+* 解决：flex-shrink: 0;
+* 例如
+```css
+.homeList {
+  height: 8rem;
+  width: 400px;
+  border-color: #EEE;
+  border-width: 1px;
+  border-style: solid;
+  background-color: transparent;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  box-shadow: #EEE -20px 20px 10px 5px;//边框内阴影
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+```
+
