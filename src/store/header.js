@@ -6,7 +6,7 @@ class HeaderStore {
     @action
     changeAge = i => {
         this.person.name = this.person.name + Number(i)
-    }
+    };
 
     constructor() {
         this.person = {
@@ -16,5 +16,5 @@ class HeaderStore {
     }
 }
 
-const header = new HeaderStore()
+const header = new HeaderStore();
 export default header

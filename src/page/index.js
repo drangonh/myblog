@@ -7,7 +7,7 @@ import {
     HashRouter as Router,
     Switch,
     Route,
-    Redirect
+    Redirect,
 } from "react-router-dom"
 
 /*

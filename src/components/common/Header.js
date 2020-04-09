@@ -3,6 +3,8 @@ import logo from '../../logo.svg';
 import '../../styles/common/header.scss';
 import {observer, inject} from 'mobx-react';
 import header from "../../store/header";
+import {createHashHistory} from "history"
+const history = createHashHistory();
 
 // const person = lazy(import("../../static/image/person.png"))
 
@@ -19,8 +21,12 @@ class Header extends React.Component {
     }
 
     changeName = () => {
-        const {header} = this.props;
-        header.changeAge(3)
+        //例子：使用mobx去改变数据
+        // const {header} = this.props;
+        // header.changeAge(3)
+        console.log(history)
+        history.push("/login")
+
     };
 
     render() {
