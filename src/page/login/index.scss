@@ -1,0 +1,77 @@
+@import "../../styles/common";
+
+$inputColor: #9195ad;
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.editValue {
+  //去掉默认样式
+  web-kit-appearance: none;
+  -moz-appearance: none;
+
+  //去掉输入框的轮廓
+  outline: 0;
+
+  font-size: $fontCommon;
+  font-family: $fontFamily;
+  width: 300px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #c8cccf;
+  padding: 0 10px;
+  text-decoration: blink;
+}
+
+.pwdMarginName {
+  margin-top: 30px;
+}
+
+//设置输入框中placeholder的样式
+/*
+css中2个冒zhidao号是伪元素，其实和1个冒号的效果是一样的，只是为了语义上更清晰明了，所以用了2冒号。
+1个冒号代表的是伪类。2个冒号代表的是伪元素。伪类在html文档中看不到，也不会显示，如:hover,:disabled。
+伪元素在html文档中看的到，也会显示，但是无法用js进行操作。
+*/
+::-webkit-input-placeholder {
+  color: $inputColor;
+  font-size: $fontCommon;
+}
+
+::-moz-placeholder {
+  color: $inputColor;
+  font-size: $fontCommon;
+}
+
+/* firefox 19+ */
+:-ms-input-placeholder {
+  color: $inputColor;
+  font-size: $fontCommon;
+}
+
+/* Internet Explorer 10+ */
+:-moz-placeholder {
+  color: $inputColor;
+  font-size: $fontCommon;
+}
+
+.loginBtn {
+  width: 320px;
+  height: 50px;
+  font-size: $fontMax;
+  font-family: $fontFamily;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: white;
+}
+
+.register{
+  text-decoration: underline;
+}
