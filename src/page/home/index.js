@@ -11,9 +11,11 @@ class App extends BaseComponent {
 
     render() {
         return (
-            <div className="App">
+            <div className="wrap">
                 <Header/>
                 <div className={"homeContent"}>
+                    <ListItem/>
+                    <ListItem/>
                     <ListItem/>
                     <ListItem/>
                     <ListItem/>

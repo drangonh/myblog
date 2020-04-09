@@ -10,7 +10,7 @@ class ListItem extends React.Component {
         return (
             <div className="homeList">
                 <div className={"homeTitle"}>Javascript学习记录</div>
-                <div className={"homeTitle"}>学习最新的语法</div>
+                <div className={"homeContent"}>学习最新的语法</div>
             </div>
         );
     }
