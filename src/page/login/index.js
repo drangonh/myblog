@@ -1,5 +1,6 @@
 import React from 'react';
 import "./index.scss"
+import {post} from "../../axios"
 
 export default class index extends React.Component {
     constructor(props) {
@@ -51,11 +52,15 @@ export default class index extends React.Component {
 
                 <div
                     onClick={this.login}
-                    className={"loginBtn pwdMarginName"}>
-                    <p>{login ? "登录" : "注册"}</p>
+                    className="loginBtn pwdMarginName">
+                    {login ? "登录" : "注册"}
                 </div>
 
-                <p hidden={!login} onClick={this.register} className={"register pwdMarginNames"}>注册</p>
+                <p hidden={!login} onClick={this.register} className="register pwdMarginName">注册</p>
+
+                <div className="alert alert-primary" role="alert">
+                    A simple primary alert—check it out!
+                </div>
             </div>
         )
     }

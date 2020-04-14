@@ -4,8 +4,11 @@ import './index.css';
 import App from './page/index';
 import * as serviceWorker from './serviceWorker';
 
-import { Provider } from "mobx-react"
+import {Provider} from "mobx-react"
 import stores from './store/index'
+
+import "./styles/common.scss"
+import "bootstrap/dist/css/bootstrap.css"
 
 import {configure} from 'mobx'; // 开启严格模式
 configure({enforceActions: true}) // 开启严格模式

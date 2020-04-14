@@ -2,9 +2,9 @@ import React from 'react';
 import './listItem.scss';
 
 class ListItem extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     render() {
         return (

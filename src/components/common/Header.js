@@ -1,5 +1,4 @@
-import React, {lazy} from 'react';
-import logo from '../../logo.svg';
+import React from 'react';
 import '../../styles/common/header.scss';
 import {observer, inject} from 'mobx-react';
 import header from "../../store/header";
