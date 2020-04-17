@@ -23,7 +23,7 @@ class SuspendBtn extends React.Component {
         const {title} = this.state;
         return (
             <div onClick={this.suspendBtn} className="suspendBtn">
-               <p className={""}>{title}</p>
+               <p className={"text"}>{title}</p>
             </div>
         );
     }

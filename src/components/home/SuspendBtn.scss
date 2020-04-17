@@ -11,11 +11,18 @@
   z-index: 1000;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  display: flex;
+  .text{
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .btnTitle{
   color: antiquewhite;
   font-family: $fontFamily;
   font-size: $fontMax;
+
 }
+
+
