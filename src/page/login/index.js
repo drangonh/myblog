@@ -1,6 +1,6 @@
 import React from 'react';
 import "./index.scss"
-import {post} from "../../axios"
+import {post,get} from "../../axios"
 import {inject, observer} from "mobx-react";
 import {createHashHistory} from "history"
 
@@ -21,7 +21,7 @@ class index extends React.Component {
     login = () => {
         const params = {userName: this.name.value, passWord: this.pwd.value};
 
-        post("login", params).then(res => {
+        get("login", params).then(res => {
             console.log("登录测试::", this.props)
             if (res.data) {
                 const {header} = this.props;
@@ -30,18 +30,31 @@ class index extends React.Component {
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
             }
         });
-        this.setState((preState, props) => {
-                return {
-                    login: true
-                }
-            }
-        )
     };
 
     register = () => {
+        const params = {
+            Username: this.name.value,
+            Password: this.pwd.value,
+            ConfirmPassword: this.confirmPwd.value
+        };
+
+        post("register", params).then(res => {
+            console.log("注册::", res);
+            return
+            if (res.data) {
+                const {header} = this.props;
+                header.changeInfo(res.data);
+                history.push("/home");
+                localStorage.setItem("userInfo", JSON.stringify(res.data))
+            }
+        });
+    };
+
+    changeState = () => {
         this.setState((preState, props) => {
                 return {
-                    login: false
+                    login: !this.state.login
                 }
             }
         )
@@ -73,12 +86,14 @@ class index extends React.Component {
                 />
 
                 <div
-                    onClick={this.login}
+                    onClick={login ? this.login : this.register}
                     className="loginBtn pwdMarginName">
                     {login ? "登录" : "注册"}
                 </div>
 
-                <p hidden={!login} onClick={this.register} className="register pwdMarginName">注册</p>
+                <p onClick={this.changeState} className="register pwdMarginName">
+                    {!login ? "登录" : "注册"}
+                </p>
             </div>
         )
     }

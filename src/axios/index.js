@@ -18,8 +18,14 @@ if (process.env.NODE_ENV == 'development') {
 // 请求超时时间
 axios.defaults.timeout = 10000;
 
+// 请求头设置，post请求的时候必须设置'Content-Type': 'application/x-www-form-urlencoded'
+//以下两种写法都可以
+axios.defaults.headers = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+};
+
 // post请求头
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 // 请求拦截器
 axios.interceptors.request.use(
@@ -91,11 +97,11 @@ axios.interceptors.response.use(
                     break;
                 // 其他错误，直接抛出错误提示
                 default:
-                    // Toast({
-                    //     message: error.response.data.message,
-                    //     duration: 1500,
-                    //     forbidClick: true
-                    // });
+                // Toast({
+                //     message: error.response.data.message,
+                //     duration: 1500,
+                //     forbidClick: true
+                // });
             }
             return Promise.reject(error.response);
         }
@@ -110,7 +116,7 @@ axios.interceptors.response.use(
 export function get(url, params) {
     return new Promise((resolve, reject) => {
         axios.get(url, {
-            params: params
+            params: params,
         })
             .then(res => {
                 resolve(res.data);
@@ -128,7 +134,10 @@ export function get(url, params) {
  */
 export function post(url, params) {
     return new Promise((resolve, reject) => {
-        axios.post(url, QS.stringify(params))
+        //axios的默认Content-Type是 application/json;charset=utf-8
+        //params= QS.stringify(params);   这会让参数拼接在URL后面
+        //如果后端参数是body中拿到的，那么需要设置Content-Type': 'application/x-www-form-urlencoded'
+        axios.post(url, params)
             .then(res => {
                 resolve(res.data);
             })
