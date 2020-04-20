@@ -4,13 +4,14 @@ class HeaderStore {
     @observable person;
 
     @action
-    changeName = obj => {
-        this.person.name = obj.userName
+    changeInfo = obj => {
+        this.person.userName = obj.userName;
     };
 
     constructor() {
+        let info = JSON.parse(localStorage.getItem("userInfo"));
         this.person = {
-            name: "黄龙",
+            userName: info ? info.userName : "黄龙",
             img: require("../static/image/person.png")
         }
     }

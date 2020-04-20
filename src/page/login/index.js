@@ -3,6 +3,7 @@ import "./index.scss"
 import {post} from "../../axios"
 import {inject, observer} from "mobx-react";
 import {createHashHistory} from "history"
+
 const history = createHashHistory();
 
 // 观察者
@@ -24,9 +25,9 @@ class index extends React.Component {
             console.log("登录测试::", this.props)
             if (res.data) {
                 const {header} = this.props;
-                header.changeName(res.data);
+                header.changeInfo(res.data);
                 history.push("/home");
-
+                localStorage.setItem("userInfo", JSON.stringify(res.data))
             }
         });
         this.setState((preState, props) => {

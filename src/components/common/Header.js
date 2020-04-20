@@ -33,7 +33,7 @@ class Header extends React.Component {
                         src={person.img}
                     />
 
-                    <p className={"name"}>{person.name}</p>
+                    <p className={"name"}>{person.userName}</p>
                 </div>
 
                 <div className={"right"}>
