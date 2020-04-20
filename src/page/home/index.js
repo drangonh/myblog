@@ -10,6 +10,10 @@ class App extends BaseComponent {
         super(props);
     }
 
+    componentDidMount() {
+
+    }
+
     render() {
         return (
             <div className="wrap">

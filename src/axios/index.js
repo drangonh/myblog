@@ -8,7 +8,7 @@ import QS from 'qs';
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
-    axios.defaults.baseURL = 'localhost:8080/';
+    axios.defaults.baseURL = 'http://192.168.3.10:8888/';
 } else if (process.env.NODE_ENV == 'debug') {
     axios.defaults.baseURL = '';
 } else if (process.env.NODE_ENV == 'production') {

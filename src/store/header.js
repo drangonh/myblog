@@ -4,8 +4,8 @@ class HeaderStore {
     @observable person;
 
     @action
-    changeAge = i => {
-        this.person.name = this.person.name + Number(i)
+    changeName = obj => {
+        this.person.name = obj.userName
     };
 
     constructor() {

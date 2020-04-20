@@ -20,12 +20,7 @@ class Header extends React.Component {
     }
 
     changeName = () => {
-        //例子：使用mobx去改变数据
-        // const {header} = this.props;
-        // header.changeAge(3)
-        console.log(history)
         history.push("/login")
-
     };
 
     render() {
