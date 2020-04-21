@@ -4,25 +4,35 @@
   position: absolute;
   bottom: 30px;
   right: 30px;
-  width: 60px;
-  height: 60px;
   border-radius: 30px;
   background-color: cornsilk;
   z-index: 1000;
   align-items: center;
   justify-content: center;
   display: flex;
-  .text{
-    padding: 0;
-    margin: 0;
+  .button {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
   }
 }
 
-.btnTitle{
+.btnTitle {
   color: antiquewhite;
   font-family: $fontFamily;
   font-size: $fontMax;
 
 }
 
+.leftPopover {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #FFF;
+  Button {
+    background-color: white;
+    border-color: #FFF;
+    color: #333;
+  }
+}
 
