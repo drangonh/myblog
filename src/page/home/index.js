@@ -5,6 +5,9 @@ import BaseComponent from "../../components/common/BaseComponent";
 import ListItem from "../../components/home/ListItem";
 import SuspendBtn from "../../components/home/SuspendBtn";
 import {Button, FormControl, FormGroup, Modal} from "react-bootstrap";
+import {createHashHistory} from "history"
+
+const history = createHashHistory();
 
 class App extends BaseComponent {
     constructor(props) {
@@ -28,10 +31,16 @@ class App extends BaseComponent {
         console.log(p1.target.value)
     };
 
+    publish = () => {
+        history.push("/markdown");
+    };
+
     render() {
         return (
             <div className="wrap">
+
                 <Header/>
+
                 <div className={"homeContent"}>
                     <ListItem/>
                     <ListItem/>
@@ -41,7 +50,9 @@ class App extends BaseComponent {
                     <ListItem/>
                 </div>
 
-                <SuspendBtn suspendBtn={this.suspendBtn}/>
+                <SuspendBtn
+                    publish={this.publish}
+                    suspendBtn={this.suspendBtn}/>
 
                 <Modal show={this.state.showModal} onHide={this.suspendBtn}>
                     <Modal.Header closeButton>

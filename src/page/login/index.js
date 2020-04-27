@@ -2,6 +2,7 @@ import React from 'react';
 import "./index.scss"
 import {post,get} from "../../axios"
 import {inject, observer} from "mobx-react";
+
 import {createHashHistory} from "history"
 
 const history = createHashHistory();

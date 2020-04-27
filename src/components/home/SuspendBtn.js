@@ -6,6 +6,7 @@ import {Button, OverlayTrigger, Popover,Modal} from 'react-bootstrap';
 class SuspendBtn extends React.Component {
     static  propTypes = {
         suspendBtn: PropTypes.func.isRequired,
+        publish: PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -27,7 +28,8 @@ class SuspendBtn extends React.Component {
     };
 
     publish = () => {
-
+        const {publish} = this.props;
+        publish && publish()
     };
 
     suspendBtn = () => {
