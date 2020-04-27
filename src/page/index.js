@@ -9,7 +9,8 @@ import {
 } from "react-router-dom"
 
 const Home = lazy(() => import("./home/index"));
-const Login = lazy(() => import("./login/index"))
+const Login = lazy(() => import("./login/index"));
+const Demo = lazy(() => import("./markdown/index"));
 
 /*
 * 这里Redirect必须放在所有的Route之后，而且
@@ -32,6 +33,10 @@ class App extends BaseComponent {
 
                         <Route path="/home">
                             <Home/>
+                        </Route>
+
+                        <Route path="/demo">
+                            <Demo/>
                         </Route>
 
                         {/*Redirect写法一*/}
