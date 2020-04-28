@@ -8,6 +8,9 @@ import {
     Redirect,
 } from "react-router-dom"
 import Routers from "../router/index"
+import {createHashHistory} from "history"
+
+const history = createHashHistory();
 
 /*
 * 这里Redirect必须放在所有的Route之后，而且
@@ -26,10 +29,10 @@ class App extends BaseComponent {
                 <Switch>
                     {
                         Routers.map((item, index) => {
-                            return(
+                            return (
                                 <Route path={item.route}>
                                     <Suspense fallback={<item.loadingComponent/>}>
-                                        <item.component/>
+                                        <item.component history={history}/>
                                     </Suspense>
                                 </Route>
                             )

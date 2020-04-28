@@ -3,10 +3,6 @@ import "./index.scss"
 import {post,get} from "../../axios"
 import {inject, observer} from "mobx-react";
 
-import {createHashHistory} from "history"
-
-const history = createHashHistory();
-
 // 观察者
 @inject('header')
 @observer
@@ -27,7 +23,7 @@ class index extends React.Component {
             if (res.data) {
                 const {header} = this.props;
                 header.changeInfo(res.data);
-                history.push("/home");
+                this.props.history.push("/home");
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
             }
         });
@@ -44,7 +40,7 @@ class index extends React.Component {
             if (res.data) {
                 const {header} = this.props;
                 header.changeInfo(res.data);
-                history.push("/home");
+                this.props.history.push("/home");
                 localStorage.setItem("userInfo", JSON.stringify(res.data))
             }
         });

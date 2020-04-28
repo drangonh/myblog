@@ -2,8 +2,6 @@ import React from 'react';
 import './Header.scss';
 import {observer, inject} from 'mobx-react';
 import header from "../../store/header";
-import {createHashHistory} from "history"
-const history = createHashHistory();
 
 // const person = lazy(import("../../static/image/person.png"))
 
@@ -20,7 +18,7 @@ class Header extends React.Component {
     }
 
     changeName = () => {
-        history.push("/login")
+        this.props.history.push("/login")
     };
 
     render() {
