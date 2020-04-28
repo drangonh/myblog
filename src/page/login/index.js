@@ -41,8 +41,6 @@ class index extends React.Component {
         };
 
         post("register", params).then(res => {
-            console.log("注册::", res);
-            return
             if (res.data) {
                 const {header} = this.props;
                 header.changeInfo(res.data);

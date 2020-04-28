@@ -7,10 +7,7 @@ import {
     Route,
     Redirect,
 } from "react-router-dom"
-
-const Home = lazy(() => import("./home/index"));
-const Login = lazy(() => import("./login/index"));
-const Markdown = lazy(() => import("./markdown/index"));
+import Routers from "../router/index"
 
 /*
 * 这里Redirect必须放在所有的Route之后，而且
@@ -24,30 +21,30 @@ class App extends BaseComponent {
     render() {
         return (
             <Router>
-                <Suspense fallback={<div>Loading</div>}>
-                    {/*Switch匹配到一个结果后就不会继续匹配*/}
-                    <Switch>
-                        <Route path="/login">
-                            <Login/>
-                        </Route>
 
-                        <Route path="/home">
-                            <Home/>
-                        </Route>
+                {/*Switch匹配到一个结果后就不会继续匹配*/}
+                <Switch>
+                    {
+                        Routers.map((item, index) => {
+                            return(
+                                <Route path={item.route}>
+                                    <Suspense fallback={item.loadingComponent}>
+                                        <item.component/>
+                                    </Suspense>
+                                </Route>
+                            )
+                        })
+                    }
 
-                        <Route path="/markdown">
-                            <Markdown/>
-                        </Route>
+                    {/*Redirect写法一*/}
+                    <Route path="/">
+                        <Redirect to="/home"/>
+                    </Route>
 
-                        {/*Redirect写法一*/}
-                        <Route path="/">
-                            <Redirect to="/home"/>
-                        </Route>
+                    {/*Redirect写法二*/}
+                    {/*<Redirect from='/' to="/home"/>*/}
+                </Switch>
 
-                        {/*Redirect写法二*/}
-                        {/*<Redirect from='/' to="/home"/>*/}
-                    </Switch>
-                </Suspense>
             </Router>
         );
     }
