@@ -4,7 +4,7 @@ import Header from "../../components/common/Header";
 import BaseComponent from "../../components/common/BaseComponent";
 import ListItem from "../../components/home/ListItem";
 import SuspendBtn from "../../components/home/SuspendBtn";
-import {Button, FormControl, FormGroup, Modal} from "react-bootstrap";
+import {Button, FormControl, Modal} from "react-bootstrap";
 
 class App extends BaseComponent {
     constructor(props) {
