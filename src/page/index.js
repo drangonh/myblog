@@ -28,7 +28,7 @@ class App extends BaseComponent {
                         Routers.map((item, index) => {
                             return(
                                 <Route path={item.route}>
-                                    <Suspense fallback={item.loadingComponent}>
+                                    <Suspense fallback={<item.loadingComponent/>}>
                                         <item.component/>
                                     </Suspense>
                                 </Route>
