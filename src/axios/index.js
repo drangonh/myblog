@@ -119,9 +119,13 @@ export function get(url, params) {
             params: params,
         })
             .then(res => {
+                console.log("请求参数", params);
+                console.log("请求地址", url);
+                console.log("请求结果", res);
                 resolve(res.data);
             })
             .catch(err => {
+                console.log("请求错误", err);
                 reject(err.data)
             })
     });
@@ -141,6 +145,7 @@ export function post(url, params) {
             .then(res => {
                 console.log("请求参数", params);
                 console.log("请求地址", url);
+                console.log("请求结果", res);
                 resolve(res.data);
             })
             .catch(err => {

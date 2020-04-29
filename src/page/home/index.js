@@ -5,7 +5,7 @@ import BaseComponent from "../../components/common/BaseComponent";
 import ListItem from "../../components/home/ListItem";
 import SuspendBtn from "../../components/home/SuspendBtn";
 import {Button, FormControl, Modal} from "react-bootstrap";
-import {post} from "../../axios";
+import {post, get} from "../../axios";
 import {inject, observer} from "mobx-react";
 
 // 观察者
@@ -17,12 +17,28 @@ class App extends BaseComponent {
         this.state = {
             showModal: false,
             title: "",
-            content: ""
+            content: "",
+            list: []
         }
     }
 
     componentDidMount() {
+        this.getList()
     }
+
+    getList = async () => {
+        const {header: {person}} = this.props;
+
+        const params = {userId: person.info.userId};
+        const res = await get("getLanguageList", params);
+
+        console.log(res.data)
+        if (res.data) {
+            this.setState({
+                list: res.data
+            })
+        }
+    };
 
     suspendBtn = () => {
         this.setState({
@@ -69,18 +85,17 @@ class App extends BaseComponent {
     };
 
     render() {
+        const {list} = this.state;
+        console.log(list)
         return (
             <div className="wrap">
 
                 <Header {...this.props}/>
 
                 <div className={"homeContent"}>
-                    <ListItem/>
-                    <ListItem/>
-                    <ListItem/>
-                    <ListItem/>
-                    <ListItem/>
-                    <ListItem/>
+                    {list.map((item, index) => {
+                        return <ListItem item={item} key={item.languageId}/>
+                    })}
                 </div>
 
                 <SuspendBtn

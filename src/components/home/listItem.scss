@@ -9,7 +9,7 @@ color:设置阴影的颜色;（可选）
 inset:这个参数默认不设置.默认情况下为外阴影,inset表示内阴影.（可选）
 */
 
-.homeList {
+.listItem {
   height: 8rem;
   width: 400px;
   border-color: #EEE;
@@ -21,17 +21,25 @@ inset:这个参数默认不设置.默认情况下为外阴影,inset表示内阴�
   box-shadow: #EEE -20px 20px 10px 5px;//边框内阴影
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   flex-shrink: 0;
+  padding: 0 10px;
 }
 
-.homeTitle{
+.title{
   font-family: $fontFamily;
-  font-size: $fontCommon;
+  font-size: $fontMax;
   margin: 5px 0px;
+  font-weight: bold;
 }
 
-.homeContent{
+.content{
   font-size: $fontCommon;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow : hidden;
+  text-overflow: ellipsis;
 }

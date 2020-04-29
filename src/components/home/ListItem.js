@@ -1,21 +1,23 @@
 import React from 'react';
 import './listItem.scss';
+import PropTypes from 'prop-types'
 
 class ListItem extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    static propTypes = {
+        item: PropTypes.object.isRequired
+    }
 
     render() {
+        const {item} = this.props;
         return (
-            <div className="homeList">
-                <p className={"homeTitle"}>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
+            <div className="listItem">
+                <div className={"title"}>
+                    {item.languageTitle}
+                </div>
 
-                <p className={"homeTitle"}>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
+                <div className={"content"}>
+                    {item.languageContent}
+                </div>
             </div>
         );
     }
