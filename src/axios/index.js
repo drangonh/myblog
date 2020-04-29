@@ -139,9 +139,12 @@ export function post(url, params) {
         //如果后端参数是body中拿到的，那么需要设置Content-Type': 'application/x-www-form-urlencoded'
         axios.post(url, params)
             .then(res => {
+                console.log("请求参数", params);
+                console.log("请求地址", url);
                 resolve(res.data);
             })
             .catch(err => {
+                console.log("请求错误", err);
                 reject(err.data)
             })
     });

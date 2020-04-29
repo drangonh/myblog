@@ -5,17 +5,23 @@ import BaseComponent from "../../components/common/BaseComponent";
 import ListItem from "../../components/home/ListItem";
 import SuspendBtn from "../../components/home/SuspendBtn";
 import {Button, FormControl, Modal} from "react-bootstrap";
+import {post} from "../../axios";
+import {inject, observer} from "mobx-react";
 
+// 观察者
+@inject('header')
+@observer
 class App extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            showModal: false
+            showModal: false,
+            title: "",
+            content: ""
         }
     }
 
     componentDidMount() {
-
     }
 
     suspendBtn = () => {
@@ -24,8 +30,38 @@ class App extends BaseComponent {
         })
     };
 
+    commit = async () => {
+        const {header: {person}} = this.props;
+
+        if (person.info) {
+            const params = {
+                languageContent: this.state.content,
+                languageTitle: this.state.title,
+                userId: person.info.userId
+            };
+
+
+            const res = await post("editLanguage", params)
+            if (res.data && res.data.result) {
+
+            }
+        } else {
+            this.props.history.push("/login");
+        }
+
+        this.suspendBtn()
+    };
+
     handleChange = (p1) => {
-        console.log(p1.target.value)
+        this.setState({
+            title: p1.target.value
+        })
+    };
+
+    changeContent = (p1) => {
+        this.setState({
+            content: p1.target.value
+        })
     };
 
     publish = () => {
@@ -60,7 +96,7 @@ class App extends BaseComponent {
                         <FormControl
                             className={"type"}
                             type="text"
-                            value={this.state.value}
+                            value={this.state.title}
                             placeholder="请输入分类名称"
                             onChange={this.handleChange}
                         />
@@ -68,14 +104,15 @@ class App extends BaseComponent {
                         <h5>分类介绍</h5>
 
                         <textarea
-                            onChange={this.handleChange}
+                            value={this.state.content}
+                            onChange={this.changeContent}
                             className="introduce"
                             placeholder={"请输入分类介绍"}
                         />
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.suspendBtn}>确定</Button>
+                        <Button onClick={this.commit}>确定</Button>
                     </Modal.Footer>
                 </Modal>
             </div>

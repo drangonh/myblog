@@ -3,6 +3,8 @@ import React from 'react'
 import toc from "remark-toc"
 import "./index.scss"
 import {Button} from "react-bootstrap"
+import {inject, observer} from "mobx-react";
+import {post} from "../../axios";
 
 const initialSource = `
 # Live demo
@@ -52,6 +54,10 @@ Read usage information and more on [GitHub](//github.com/rexxars/react-markdown)
 A component by [Espen Hovlandsdal](https://espen.codes/)
 `
 
+// 观察者
+@inject('header')
+@observer
+
 class Index extends React.PureComponent {
     constructor(props) {
         super(props)
@@ -63,21 +69,40 @@ class Index extends React.PureComponent {
     }
 
     handleMarkdownChange = (evt) => {
-        console.log(evt.target.value)
         this.setState({markdownSrc: evt.target.value})
-    }
+    };
 
-    // handleControlsChange(mode) {
-    //     this.setState({htmlMode: mode})
-    // }
+    changePage = async () => {
+        const {header} = this.props;
+        const params = {
+            languageContent: "",
+            languageTitle: "",
+            userId: header.info.userId
+        };
+
+        console.log(params);
+        return
+        const res = await post("editLanguage", params)
+
+        console.log(res)
+    };
 
     render() {
         return (
             <div className="demo plr20">
 
                 <div className={"top plr20"}>
-                    <Button variant="outline-primary" className={"mr20"}>修改文章</Button>{' '}
-                    <Button variant="outline-secondary">发布文章</Button>{' '}
+                    <Button
+                        onClick={this.changePage}
+                        variant="outline-primary"
+                        className={"mr20"}>
+                        修改文章
+                    </Button>
+
+                    <Button
+                        variant="outline-secondary">
+                        发布文章
+                    </Button>
                 </div>
 
                 <div>

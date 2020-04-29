@@ -30,7 +30,9 @@ class App extends BaseComponent {
                     {
                         Routers.map((item, index) => {
                             return (
-                                <Route path={item.route}>
+                                <Route
+                                    key={item.loadingComponent}
+                                    path={item.route}>
                                     <Suspense fallback={<item.loadingComponent/>}>
                                         <item.component history={history}/>
                                     </Suspense>
