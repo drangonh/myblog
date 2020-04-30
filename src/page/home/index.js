@@ -81,7 +81,12 @@ class App extends BaseComponent {
     };
 
     publish = () => {
-        this.props.history.push("/markdown");
+        this.props.history.push({
+            pathname: "/markdown",
+            state: {
+                list: this.state.list
+            }
+        });
     };
 
     render() {

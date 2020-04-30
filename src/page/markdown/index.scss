@@ -16,7 +16,6 @@
   height: 100px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   align-items: center;
 }
 
@@ -38,4 +37,8 @@ textarea {
   width: 100%;
   height: 100%;
   outline: none;
+}
+
+.uf1{
+  flex: 1;
 }

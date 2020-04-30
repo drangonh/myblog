@@ -2,7 +2,7 @@ import Markdown from "react-markdown"
 import React from 'react'
 import toc from "remark-toc"
 import "./index.scss"
-import {Button} from "react-bootstrap"
+import {Button, ButtonGroup, DropdownButton, DropdownItem} from "react-bootstrap"
 import {inject, observer} from "mobx-react";
 import {post} from "../../axios";
 
@@ -61,11 +61,14 @@ A component by [Espen Hovlandsdal](https://espen.codes/)
 class Index extends React.PureComponent {
     constructor(props) {
         super(props)
-
+        const state = props.history.location.state;
         this.state = {
             markdownSrc: initialSource,
-            htmlMode: 'raw'
+            htmlMode: 'raw',
+            list: state ? state.list : [],
+            selType: null
         }
+
     }
 
     handleMarkdownChange = (evt) => {
@@ -87,11 +90,56 @@ class Index extends React.PureComponent {
         console.log(res)
     };
 
+    publishPage = async () => {
+        const {header: {person}} = this.props;
+        const {selType, markdownSrc} = this.state;
+        if (!selType) {
+            return
+        }
+        const params = {
+            userId: person.info.userId,
+            languageId: selType.languageId,
+            content: markdownSrc,
+            htmlContent: ""
+        };
+
+        const res = await post("editArticle", params)
+        console.log(res)
+    };
+
+    changeType = (item) => {
+        this.setState({
+            selType: item
+        })
+    };
+
     render() {
+        const {list, selType} = this.state;
+        console.log(selType);
         return (
             <div className="demo plr20">
 
-                <div className={"top plr20"}>
+                <header className={"top plr20"}>
+
+                    <ButtonGroup>
+                        <DropdownButton title={selType ? selType.languageTitle : "选择文章类型"} id="bg-nested-dropdown">
+
+                            {list.map((item, index) => {
+                                return (
+                                    <DropdownItem
+                                        onSelect={() => this.changeType(item)}
+                                        eventKey={index + 1}
+                                        key={item.languageId}>
+                                        {item.languageTitle}
+                                    </DropdownItem>
+
+                                )
+                            })}
+                        </DropdownButton>
+                    </ButtonGroup>
+
+
+                    <div className={"uf1"}/>
                     <Button
                         onClick={this.changePage}
                         variant="outline-primary"
@@ -100,10 +148,11 @@ class Index extends React.PureComponent {
                     </Button>
 
                     <Button
+                        onClick={this.publishPage}
                         variant="outline-secondary">
                         发布文章
                     </Button>
-                </div>
+                </header>
 
                 <div>
                     <div className={"item left"}>
