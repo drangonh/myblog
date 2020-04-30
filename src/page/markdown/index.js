@@ -7,7 +7,7 @@ import toc from "remark-toc"
 import "./index.scss"
 import {Button, ButtonGroup, DropdownButton, DropdownItem} from "react-bootstrap"
 import {inject, observer} from "mobx-react";
-import {post} from "../../axios";
+import {post, get} from "../../axios";
 
 const initialSource = `
 ### 编辑文章内容
@@ -24,14 +24,56 @@ class Index extends React.PureComponent {
         super(props)
         const state = props.history.location.state;
         this.state = {
-            markdownSrc: initialSource,
+            markdownSrc: initialSource,             //markdown 文本
             htmlMode: 'raw',
-            list: state ? state.list : [],
-            selType: null,
-            storeTitle: ""
+            list: state ? state.list : [],          //语言分类列表
+            publish: state ? state.publish : true,  //是否是发布文章
+            selType: null,                          //选中的语言类型
+            storeTitle: "",                         //文章标题
+            detail: null                            //更改时候的文章详情
         }
 
+
     }
+
+    componentDidMount() {
+        // 编辑时候先获取详情
+        if (!this.state.publish) {
+            this.getDetail()
+        }
+    }
+
+    getDetail = async () => {
+        let obj;
+        const state = this.props.history.location.state;
+        // state.item
+        const {header: {person}} = this.props;
+        const params = {
+            userId: person.info.userId,
+            languageId: state.item.languageId,
+            contentId: state.item.contentId,
+        };
+
+        const res = await get("getArticleDetail", params)
+        console.log(res.data);
+
+
+        if (res && res.data) {
+
+            this.state.list.forEach((item, index) => {
+                if (item.languageId == res.data.languageId) {
+                    obj = item
+                }
+            });
+
+            this.setState({
+                detail: res.data,
+                storeTitle: res.data.storeTitle,
+                markdownSrc: res.data.content,
+                selType: obj
+            })
+        }
+    };
 
     handleMarkdownChange = (evt) => {
         this.setState({markdownSrc: evt.target.value})
@@ -42,23 +84,15 @@ class Index extends React.PureComponent {
     };
 
     changePage = async () => {
-        const {header} = this.props;
-        const params = {
-            languageContent: "",
-            languageTitle: "",
-            userId: header.info.userId
-        };
+        this.setState({
+            publish: !this.state.publish
+        })
 
-        console.log(params);
-        return
-        const res = await post("editLanguage", params)
-
-        console.log(res)
     };
 
     publishPage = async () => {
         const {header: {person}} = this.props;
-        const {selType, markdownSrc} = this.state;
+        const {selType, markdownSrc, publish, detail} = this.state;
         if (!selType) {
             return
         }
@@ -67,7 +101,8 @@ class Index extends React.PureComponent {
             languageId: selType.languageId,
             content: markdownSrc,
             htmlContent: "",
-            storeTitle: this.state.storeTitle
+            storeTitle: this.state.storeTitle,
+            contentId: detail ? detail.contentId : 0
         };
 
         const res = await post("editArticle", params)
@@ -84,60 +119,80 @@ class Index extends React.PureComponent {
         })
     };
 
+
     render() {
-        const {list, selType} = this.state;
+        const {list, selType, publish} = this.state;
         console.log(selType);
         return (
             <div className="demo plr20">
 
                 <header className={"top plr20"}>
 
-                    <ButtonGroup>
-                        <DropdownButton title={selType ? selType.languageTitle : "选择文章类型"} id="bg-nested-dropdown">
+                    {
+                        publish ?
+                            <ButtonGroup>
+                                <DropdownButton title={selType ? selType.languageTitle : "选择文章类型"}
+                                                id="bg-nested-dropdown">
 
-                            {list.map((item, index) => {
-                                return (
-                                    <DropdownItem
-                                        onSelect={() => this.changeType(item)}
-                                        eventKey={index + 1}
-                                        key={item.languageId}>
-                                        {item.languageTitle}
-                                    </DropdownItem>
+                                    {list.map((item, index) => {
+                                        return (
+                                            <DropdownItem
+                                                onSelect={() => this.changeType(item)}
+                                                eventKey={index + 1}
+                                                key={item.languageId}>
+                                                {item.languageTitle}
+                                            </DropdownItem>
 
-                                )
-                            })}
-                        </DropdownButton>
-                    </ButtonGroup>
-
+                                        )
+                                    })}
+                                </DropdownButton>
+                            </ButtonGroup>
+                            : null
+                    }
 
                     <div className={"uf1"}/>
-                    <Button
-                        onClick={this.changePage}
-                        variant="outline-primary"
-                        className={"mr20"}>
-                        修改文章
-                    </Button>
 
-                    <Button
-                        onClick={this.publishPage}
-                        variant="outline-secondary">
-                        发布文章
-                    </Button>
+                    {
+                        publish ?
+                            null :
+                            <Button
+                                onClick={this.changePage}
+                                variant="outline-primary"
+                                className={"mr20"}>
+                                修改文章
+                            </Button>
+                    }
+
+                    {
+                        publish ?
+                            <Button
+                                onClick={this.publishPage}
+                                variant="outline-secondary">
+                                发布文章
+                            </Button>
+                            : null
+                    }
+
                 </header>
 
                 <div>
-                    <div className={"item left"}>
-                        <input
-                            placeholder={"请输入文章标题"}
-                            value={this.state.storeTitle}
-                            onChange={this.handleTitleChange}
-                        />
-                        <textarea
-                            placeholder={"markdown文档格式"}
-                            value={this.state.markdownSrc}
-                            onChange={this.handleMarkdownChange}
-                        />
-                    </div>
+
+                    {publish ?
+                        <div className={"item left"}>
+                            <input
+                                placeholder={"请输入文章标题"}
+                                value={this.state.storeTitle}
+                                onChange={this.handleTitleChange}
+                            />
+                            <textarea
+                                placeholder={"markdown文档格式"}
+                                value={this.state.markdownSrc}
+                                onChange={this.handleMarkdownChange}
+                            />
+                        </div>
+                        : null
+                    }
+
 
                     <div className="item">
                         <Markdown

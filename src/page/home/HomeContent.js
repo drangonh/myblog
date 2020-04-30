@@ -51,13 +51,15 @@ class HomeContent extends BaseComponent {
     };
 
     //跳转到文章详情页
-    openPage = () => {
-        alert(1);
-        return
-        this.props.history({
-            pathname: "",
-            state: {}
-        })
+    openPage = (item) => {
+        this.props.history.push({
+            pathname: "/markdown",
+            state: {
+                list: this.props.types,
+                publish: false,
+                item: item
+            }
+        });
     };
 
     render() {
@@ -72,14 +74,14 @@ class HomeContent extends BaseComponent {
                 {
                     list.map((item, index) => {
                         return (
-                            <Alert key={item.contentId} variant="dark" onClick={() => this.openPage()}>
+                            <Alert key={item.contentId} variant="dark" onClick={() => this.openPage(item)}>
 
                                 {/*<Alert.Heading>*/}
-                                    {/*{item.storeTitle}*/}
+                                {/*{item.storeTitle}*/}
                                 {/*</Alert.Heading>*/}
 
                                 {/*<p className={"content"}>*/}
-                                    {/*{item.brief}*/}
+                                {/*{item.brief}*/}
                                 {/*</p>*/}
 
                                 <Markdown

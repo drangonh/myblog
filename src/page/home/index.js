@@ -92,7 +92,8 @@ class App extends BaseComponent {
         this.props.history.push({
             pathname: "/markdown",
             state: {
-                list: this.state.list
+                list: this.state.list,
+                publish: true
             }
         });
     };
@@ -101,16 +102,6 @@ class App extends BaseComponent {
     changeSelType = (item) => {
         this.setState({
             selType: item
-        })
-    };
-
-    //跳转到文章详情页
-    openPage = () => {
-        alert(1);
-        return
-        this.props.history({
-            pathname: "",
-            state: {}
         })
     };
 
@@ -138,6 +129,8 @@ class App extends BaseComponent {
                     </div>
 
                     <HomeContent
+                        types={list}
+                        history={this.props.history}
                         languageContent={selType.languageContent}
                         languageId={selType.languageId}/>
 
