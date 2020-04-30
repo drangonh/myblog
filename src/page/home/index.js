@@ -1,3 +1,8 @@
+/**
+* 首页
+* author:dragonh
+* time:2020/4/30
+**/
 import React from 'react';
 import './index.scss';
 import Header from "../../components/common/Header";
@@ -97,46 +102,54 @@ class App extends BaseComponent {
 
                 <Header {...this.props}/>
 
+                {/*页面主体*/}
                 <div className={"homeContent"}>
                     {list.map((item, index) => {
-                        return <ListItem item={item} key={item.languageId}/>
+                        return <ListItem {...this.props} item={item} key={item.languageId}/>
                     })}
                 </div>
 
+                {/*悬浮按钮*/}
                 <SuspendBtn
                     publish={this.publish}
                     suspendBtn={this.suspendBtn}/>
 
-                <Modal show={this.state.showModal} onHide={this.suspendBtn}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>新增分类</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <h5>分类名称</h5>
-                        <FormControl
-                            className={"type"}
-                            type="text"
-                            value={this.state.title}
-                            placeholder="请输入分类名称"
-                            onChange={this.handleChange}
-                        />
-
-                        <h5>分类介绍</h5>
-
-                        <textarea
-                            value={this.state.content}
-                            onChange={this.changeContent}
-                            className="introduce"
-                            placeholder={"请输入分类介绍"}
-                        />
-
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.commit}>确定</Button>
-                    </Modal.Footer>
-                </Modal>
+                {this.renderModal()}
             </div>
         );
+    }
+
+    renderModal(){
+        return(
+            <Modal show={this.state.showModal} onHide={this.suspendBtn}>
+                <Modal.Header closeButton>
+                    <Modal.Title>新增分类</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h5>分类名称</h5>
+                    <FormControl
+                        className={"type"}
+                        type="text"
+                        value={this.state.title}
+                        placeholder="请输入分类名称"
+                        onChange={this.handleChange}
+                    />
+
+                    <h5>分类介绍</h5>
+
+                    <textarea
+                        value={this.state.content}
+                        onChange={this.changeContent}
+                        className="introduce"
+                        placeholder={"请输入分类介绍"}
+                    />
+
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.commit}>确定</Button>
+                </Modal.Footer>
+            </Modal>
+        )
     }
 }
 

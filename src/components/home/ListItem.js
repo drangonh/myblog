@@ -10,7 +10,7 @@ class ListItem extends React.Component {
     render() {
         const {item} = this.props;
         return (
-            <div className="listItem">
+            <div onSelect={this.openPageList} className="listItem">
                 <div className={"title"}>
                     {item.languageTitle}
                 </div>
@@ -20,6 +20,14 @@ class ListItem extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    //跳转到指定语言分类的文章列表
+    openPageList = () => {
+        this.props.history({
+            pathname: "",
+            state: {}
+        })
     }
 }
 
