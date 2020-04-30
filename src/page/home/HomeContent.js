@@ -47,6 +47,10 @@ class HomeContent extends BaseComponent {
             this.setState({
                 list: res.data,
             })
+        }else {
+            this.setState({
+                list: [],
+            })
         }
     };
 

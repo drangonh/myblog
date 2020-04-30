@@ -74,6 +74,7 @@ class App extends BaseComponent {
         }
 
         this.suspendBtn()
+        this.getList()
     };
 
     handleChange = (p1) => {
