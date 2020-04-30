@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 import Markdown from "react-markdown"
 import React from 'react'
@@ -27,13 +27,18 @@ class Index extends React.PureComponent {
             markdownSrc: initialSource,
             htmlMode: 'raw',
             list: state ? state.list : [],
-            selType: null
+            selType: null,
+            storeTitle: ""
         }
 
     }
 
     handleMarkdownChange = (evt) => {
         this.setState({markdownSrc: evt.target.value})
+    };
+
+    handleTitleChange = (evt) => {
+        this.setState({storeTitle: evt.target.value})
     };
 
     changePage = async () => {
@@ -61,11 +66,16 @@ class Index extends React.PureComponent {
             userId: person.info.userId,
             languageId: selType.languageId,
             content: markdownSrc,
-            htmlContent: ""
+            htmlContent: "",
+            storeTitle: this.state.storeTitle
         };
 
         const res = await post("editArticle", params)
         console.log(res)
+
+        if (res && res.data && res.data.result) {
+            alert(res.data.msg)
+        }
     };
 
     changeType = (item) => {
@@ -117,11 +127,16 @@ class Index extends React.PureComponent {
 
                 <div>
                     <div className={"item left"}>
-                    <textarea
-                        placeholder={"markdown文档格式"}
-                        value={this.state.markdownSrc}
-                        onChange={this.handleMarkdownChange}
-                    />
+                        <input
+                            placeholder={"请输入文章标题"}
+                            value={this.state.storeTitle}
+                            onChange={this.handleTitleChange}
+                        />
+                        <textarea
+                            placeholder={"markdown文档格式"}
+                            value={this.state.markdownSrc}
+                            onChange={this.handleMarkdownChange}
+                        />
                     </div>
 
                     <div className="item">

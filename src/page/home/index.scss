@@ -19,17 +19,65 @@
   background-color: #f5f5f5;
 }
 
+//.homeContent {
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
+//  padding-bottom: 50px;
+//  padding-top: 50px;
+//  flex: 1;
+//  -webkit-box-flex: 1;
+//  -webkit-flex: 1;
+//  -ms-flex: 1;
+//  overflow-y: auto;
+//}
+
 .homeContent {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 50px;
-  padding-top: 50px;
+  flex-direction: row;
   flex: 1;
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
   overflow-y: auto;
+  border: 1px solid #EEE;
+  border-width: 1px 0 0 0 ;
+}
+
+.contentLeft {
+  width: 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #EEE;
+  border-width: 0 1px 0 0;
+}
+
+.contentRight {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 0 10px;
+}
+
+.leftItem{
+  height: 44px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selLeftItem{
+  color: cornflowerblue;
+}
+
+.languageContent{
+  display: flex;
+  //justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .type {
@@ -81,3 +129,13 @@ textarea:hover {
 //  outline: none;    // 如何把蓝色去掉？
 //  border: 1px solid #58b195; // 如何改成别的颜色？
 //}
+
+.content{
+  font-size: $fontCommon;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow : hidden;
+  text-overflow: ellipsis;
+}

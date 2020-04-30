@@ -1,17 +1,18 @@
 /**
-* 首页
-* author:dragonh
-* time:2020/4/30
-**/
+ * 首页
+ * author:dragonh
+ * time:2020/4/30
+ **/
 import React from 'react';
 import './index.scss';
 import Header from "../../components/common/Header";
 import BaseComponent from "../../components/common/BaseComponent";
 import ListItem from "../../components/home/ListItem";
 import SuspendBtn from "../../components/home/SuspendBtn";
-import {Button, FormControl, Modal} from "react-bootstrap";
+import {Button, FormControl, Modal, Alert} from "react-bootstrap";
 import {post, get} from "../../axios";
 import {inject, observer} from "mobx-react";
+import HomeContent from "./HomeContent";
 
 // 观察者
 @inject('header')
@@ -23,7 +24,8 @@ class App extends BaseComponent {
             showModal: false,
             title: "",
             content: "",
-            list: []
+            list: [],
+            selType: {}
         }
     }
 
@@ -40,7 +42,8 @@ class App extends BaseComponent {
         console.log(res.data)
         if (res.data) {
             this.setState({
-                list: res.data
+                list: res.data,
+                selType: res.data[0]
             })
         }
     };
@@ -94,19 +97,50 @@ class App extends BaseComponent {
         });
     };
 
+    //改变选中的语言
+    changeSelType = (item) => {
+        this.setState({
+            selType: item
+        })
+    };
+
+    //跳转到文章详情页
+    openPage = () => {
+        alert(1);
+        return
+        this.props.history({
+            pathname: "",
+            state: {}
+        })
+    };
+
     render() {
-        const {list} = this.state;
-        console.log(list)
+        const {list, selType} = this.state;
         return (
             <div className="wrap">
 
                 <Header {...this.props}/>
 
-                {/*页面主体*/}
                 <div className={"homeContent"}>
-                    {list.map((item, index) => {
-                        return <ListItem {...this.props} item={item} key={item.languageId}/>
-                    })}
+
+                    <div className={"contentLeft"}>
+
+
+                        {list.map((item, index) => {
+                            return (
+                                <div onClick={() => this.changeSelType(item)}
+                                     className={selType.languageId == item.languageId ? "leftItem selLeftItem" : "leftItem"}
+                                     key={item.languageId}>
+                                    {item.languageTitle}
+                                </div>
+                            )
+                        })}
+                    </div>
+
+                    <HomeContent
+                        languageContent={selType.languageContent}
+                        languageId={selType.languageId}/>
+
                 </div>
 
                 {/*悬浮按钮*/}
@@ -119,8 +153,8 @@ class App extends BaseComponent {
         );
     }
 
-    renderModal(){
-        return(
+    renderModal() {
+        return (
             <Modal show={this.state.showModal} onHide={this.suspendBtn}>
                 <Modal.Header closeButton>
                     <Modal.Title>新增分类</Modal.Title>
