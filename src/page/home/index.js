@@ -43,7 +43,7 @@ class App extends BaseComponent {
         if (res.data) {
             this.setState({
                 list: res.data,
-                selType: res.data[0]
+                selType: res.data.length != 0 ? res.data[0] : {}
             })
         }
     };
