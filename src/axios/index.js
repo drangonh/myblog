@@ -6,13 +6,16 @@ import QS from 'qs';
 // import {Toast} from 'vant';
 // import store from '../store/index'
 
+const development = "http://127.0.0.1:8888/";
+const production = "http://www.dontheway.com:8888/";
+
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
-    axios.defaults.baseURL = 'http://127.0.0.1:8888/';
+    axios.defaults.baseURL = development;
 } else if (process.env.NODE_ENV == 'debug') {
     axios.defaults.baseURL = '';
 } else if (process.env.NODE_ENV == 'production') {
-    axios.defaults.baseURL = 'http://www.dontheway.com:8888/';
+    axios.defaults.baseURL = production;
 }
 
 // 请求超时时间
