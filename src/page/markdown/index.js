@@ -109,7 +109,9 @@ class Index extends React.PureComponent {
         console.log(res)
 
         if (res && res.data && res.data.result) {
-            alert(res.data.msg)
+            this.props.history.push({
+                pathname:"/home"
+            })
         }
     };
 

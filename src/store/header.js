@@ -12,11 +12,10 @@ class HeaderStore {
 
     constructor() {
         let info = JSON.parse(localStorage.getItem("userInfo"));
-        console.log("个人信息", info)
         this.person = {
-            userName: info ? info.userName : "黄龙",
+            userName: info ? info.userName : "登录",
             img: require("../static/image/person.png"),
-            info: info
+            info: info ? info : {}
         }
     }
 }
