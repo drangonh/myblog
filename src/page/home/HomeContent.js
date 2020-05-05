@@ -79,17 +79,7 @@ class HomeContent extends BaseComponent {
                     list.map((item, index) => {
                         return (
                             <div key={item.contentId} className={"content"}  onClick={() => this.openPage(item)}>
-
-                                {/*<Alert.Heading>*/}
-                                {/*{item.storeTitle}*/}
-                                {/*</Alert.Heading>*/}
-
-                                {/*<p className={"content"}>*/}
-                                {/*{item.brief}*/}
-                                {/*</p>*/}
-
                                 <Markdown
-                                    className=""
                                     source={item.brief}
                                     skipHtml={this.state.htmlMode === 'skip'}
                                     escapeHtml={this.state.htmlMode === 'escape'}
