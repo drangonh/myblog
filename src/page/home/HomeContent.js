@@ -47,7 +47,7 @@ class HomeContent extends BaseComponent {
             this.setState({
                 list: res.data,
             })
-        }else {
+        } else {
             this.setState({
                 list: [],
             })
@@ -55,13 +55,14 @@ class HomeContent extends BaseComponent {
     };
 
     //跳转到文章详情页
-    openPage = (item) => {
+    openPage = (item, edit) => {
         this.props.history.push({
             pathname: "/markdown",
             state: {
                 list: this.props.types,
-                publish: false,
-                item: item
+                publish: edit ? true : false, //编辑文章是显示发布样式
+                item: item,
+                edit: edit
             }
         });
     };
@@ -78,7 +79,7 @@ class HomeContent extends BaseComponent {
                 {
                     list.map((item, index) => {
                         return (
-                            <div key={item.contentId} className={"content"}  onClick={() => this.openPage(item)}>
+                            <div key={item.contentId} className={"content"} onClick={() => this.openPage(item, false)}>
                                 <Markdown
                                     source={item.brief}
                                     skipHtml={this.state.htmlMode === 'skip'}
@@ -86,7 +87,7 @@ class HomeContent extends BaseComponent {
                                     plugins={[toc]}
                                 />
 
-                                <div className={"contentBotBn"}>
+                                <div className={"contentBotBn"} onClick={() => this.openPage(item, true)}>
                                     <div className={"editPage editBtn"}>
                                         编辑
                                     </div>

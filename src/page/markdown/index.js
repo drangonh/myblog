@@ -28,6 +28,7 @@ class Index extends React.PureComponent {
             htmlMode: 'raw',
             list: state ? state.list : [],          //语言分类列表
             publish: state ? state.publish : true,  //是否是发布文章
+            edit: state ? state.edit : false,  //是否是发布文章
             selType: null,                          //选中的语言类型
             storeTitle: "",                         //文章标题
             detail: null                            //更改时候的文章详情
@@ -38,7 +39,7 @@ class Index extends React.PureComponent {
 
     componentDidMount() {
         // 编辑时候先获取详情
-        if (!this.state.publish) {
+        if (!this.state.publish || this.state.edit) {
             this.getDetail()
         }
     }
@@ -110,7 +111,7 @@ class Index extends React.PureComponent {
 
         if (res && res.data && res.data.result) {
             this.props.history.push({
-                pathname:"/home"
+                pathname: "/home"
             })
         }
     };
@@ -177,10 +178,10 @@ class Index extends React.PureComponent {
 
                 </header>
 
-                <div>
+                <div className={"markdownContent"}>
 
                     {publish ?
-                        <div className={"item left"}>
+                        <div className={"left"}>
                             <input
                                 placeholder={"请输入文章标题"}
                                 value={this.state.storeTitle}
@@ -196,7 +197,7 @@ class Index extends React.PureComponent {
                     }
 
 
-                    <div className="item">
+                    <div className="right">
                         <Markdown
                             className="result"
                             source={this.state.markdownSrc}

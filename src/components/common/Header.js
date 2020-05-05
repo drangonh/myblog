@@ -25,7 +25,7 @@ class Header extends React.Component {
         const {header: {person}} = this.props;
         return (
             <div className="header">
-                <div className={"left"} onClick={this.changeName}>
+                <div className={"homeLeft"} onClick={this.changeName}>
                     <img
                         className={"person"}
                         src={person.img}
@@ -34,7 +34,8 @@ class Header extends React.Component {
                     <p className={"name"}>{person.userName}</p>
                 </div>
 
-                {/*<div className={"right"}>*/}
+                <div className={"right"}>
+
                     {/*<img*/}
                         {/*className={"list"}*/}
                         {/*src={require("../../static/image/list.png")}*/}
@@ -44,7 +45,7 @@ class Header extends React.Component {
                         {/*className={"home"}*/}
                         {/*src={require("../../static/image/home.png")}*/}
                     {/*/>*/}
-                {/*</div>*/}
+                </div>
             </div>
         );
     }
