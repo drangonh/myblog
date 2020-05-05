@@ -78,7 +78,7 @@ class HomeContent extends BaseComponent {
                 {
                     list.map((item, index) => {
                         return (
-                            <Alert key={item.contentId} variant="dark" onClick={() => this.openPage(item)}>
+                            <div key={item.contentId} className={"content"}  onClick={() => this.openPage(item)}>
 
                                 {/*<Alert.Heading>*/}
                                 {/*{item.storeTitle}*/}
@@ -89,13 +89,23 @@ class HomeContent extends BaseComponent {
                                 {/*</p>*/}
 
                                 <Markdown
-                                    className="content"
+                                    className=""
                                     source={item.brief}
                                     skipHtml={this.state.htmlMode === 'skip'}
                                     escapeHtml={this.state.htmlMode === 'escape'}
                                     plugins={[toc]}
                                 />
-                            </Alert>
+
+                                <div className={"contentBotBn"}>
+                                    <div className={"editPage editBtn"}>
+                                        编辑
+                                    </div>
+
+                                    <div className={"editPage delBtn"}>
+                                        删除
+                                    </div>
+                                </div>
+                            </div>
                         )
                     })
                 }

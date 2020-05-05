@@ -34,17 +34,17 @@ class Header extends React.Component {
                     <p className={"name"}>{person.userName}</p>
                 </div>
 
-                <div className={"right"}>
-                    <img
-                        className={"list"}
-                        src={require("../../static/image/list.png")}
-                    />
+                {/*<div className={"right"}>*/}
+                    {/*<img*/}
+                        {/*className={"list"}*/}
+                        {/*src={require("../../static/image/list.png")}*/}
+                    {/*/>*/}
 
-                    <img
-                        className={"home"}
-                        src={require("../../static/image/home.png")}
-                    />
-                </div>
+                    {/*<img*/}
+                        {/*className={"home"}*/}
+                        {/*src={require("../../static/image/home.png")}*/}
+                    {/*/>*/}
+                {/*</div>*/}
             </div>
         );
     }
