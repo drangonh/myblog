@@ -7,7 +7,7 @@ import React from 'react';
 import './index.scss';
 import BaseComponent from "../../components/common/BaseComponent";
 import {Alert, Button, Modal} from "react-bootstrap";
-import {get} from "../../axios";
+import {get, post} from "../../axios";
 import {inject, observer} from "mobx-react";
 import toc from "remark-toc";
 import Markdown from "react-markdown";
@@ -20,8 +20,11 @@ class HomeContent extends BaseComponent {
         super(props);
         this.state = {
             list: [],
-            modalShow: false
+            modalShow: false,
+            languageId:""
         }
+
+        this.delItem = {}
     }
 
     componentDidMount() {
@@ -30,11 +33,22 @@ class HomeContent extends BaseComponent {
 
     componentWillReceiveProps(nextProps) {
         this.getList(nextProps)
+
+        const {languageId} = nextProps;
+        this.setState({
+            languageId
+        },()=>{
+            this.getList()
+        })
     }
 
-    getList = async (nextProps) => {
+    componentWillUnmount() {
+        this.delItem = {}
+    }
+
+    getList = async () => {
         const {header: {person}} = this.props;
-        const {languageId} = nextProps;
+        const {languageId} = this.state;
 
         const params = {
             userId: person.info.userId,
@@ -75,6 +89,22 @@ class HomeContent extends BaseComponent {
         });
     };
 
+    // 删除文章
+    delArticle = async (item, e) => {
+        const params = {
+            contentId: item.contentId
+        };
+
+        const res = await post("deleteArticle", params);
+
+        if (res.data) {
+            this.setModalShow(false, e)
+
+            this.getList()
+        }
+
+    };
+
     render() {
         const {languageContent} = this.props;
         const {list, modalShow} = this.state;
@@ -100,7 +130,10 @@ class HomeContent extends BaseComponent {
                                         编辑
                                     </div>
 
-                                    <div className={"editPage delBtn"} onClick={(e) => this.setModalShow(true, e)}>
+                                    <div className={"editPage delBtn"} onClick={(e) => {
+                                        this.delItem = item;
+                                        this.setModalShow(true, e)
+                                    }}>
                                         删除
                                     </div>
                                 </div>
@@ -114,6 +147,7 @@ class HomeContent extends BaseComponent {
                     onHide={(e) => {
                         this.setModalShow(false, e)
                     }}
+                    delArticle={(e) => this.delArticle(this.delItem, e)}
                 />
 
             </div>
@@ -141,7 +175,9 @@ function DeleteModal(props) {
                 </p>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={(e) => props.onHide && props.onHide(e)}>确定</Button>
+                <Button onClick={(e) => {
+                    props.delArticle && props.delArticle()
+                }}>确定</Button>
             </Modal.Footer>
         </Modal>
     );
