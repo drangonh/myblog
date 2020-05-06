@@ -6,7 +6,7 @@
 import React from 'react';
 import './index.scss';
 import BaseComponent from "../../components/common/BaseComponent";
-import {Alert} from "react-bootstrap";
+import {Alert, Button, Modal} from "react-bootstrap";
 import {get} from "../../axios";
 import {inject, observer} from "mobx-react";
 import toc from "remark-toc";
@@ -20,6 +20,7 @@ class HomeContent extends BaseComponent {
         super(props);
         this.state = {
             list: [],
+            modalShow: false
         }
     }
 
@@ -54,6 +55,13 @@ class HomeContent extends BaseComponent {
         }
     };
 
+    setModalShow = (res, e) => {
+        this.setState({
+            modalShow: res
+        });
+        e && e.stopPropagation()
+    };
+
     //跳转到文章详情页
     openPage = (item, edit) => {
         this.props.history.push({
@@ -69,7 +77,7 @@ class HomeContent extends BaseComponent {
 
     render() {
         const {languageContent} = this.props;
-        const {list} = this.state;
+        const {list, modalShow} = this.state;
         return (
             <div className={"contentRight"}>
                 <div className={"languageContent"}>
@@ -87,12 +95,12 @@ class HomeContent extends BaseComponent {
                                     plugins={[toc]}
                                 />
 
-                                <div className={"contentBotBn"} onClick={() => this.openPage(item, true)}>
-                                    <div className={"editPage editBtn"}>
+                                <div className={"contentBotBn"}>
+                                    <div className={"editPage editBtn"} onClick={() => this.openPage(item, true)}>
                                         编辑
                                     </div>
 
-                                    <div className={"editPage delBtn"}>
+                                    <div className={"editPage delBtn"} onClick={(e) => this.setModalShow(true, e)}>
                                         删除
                                     </div>
                                 </div>
@@ -101,10 +109,42 @@ class HomeContent extends BaseComponent {
                     })
                 }
 
+                <DeleteModal
+                    show={modalShow}
+                    onHide={(e) => {
+                        this.setModalShow(false, e)
+                    }}
+                />
+
             </div>
         );
     }
 
+}
+
+function DeleteModal(props) {
+    return (
+        <Modal
+            {...props}
+            size="sm"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    提醒
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <p>
+                    您将要删除这篇文章，确定删除吗？
+                </p>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={(e) => props.onHide && props.onHide(e)}>确定</Button>
+            </Modal.Footer>
+        </Modal>
+    );
 }
 
 export default HomeContent;
