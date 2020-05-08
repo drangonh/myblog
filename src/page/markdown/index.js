@@ -50,7 +50,6 @@ class Index extends React.PureComponent {
         // state.item
         const {header: {person}} = this.props;
         const params = {
-            userId: person.info.userId,
             languageId: state.item.languageId,
             contentId: state.item.contentId,
         };
@@ -98,7 +97,6 @@ class Index extends React.PureComponent {
             return
         }
         const params = {
-            userId: person.info.userId,
             languageId: selType.languageId,
             content: markdownSrc,
             htmlContent: "",

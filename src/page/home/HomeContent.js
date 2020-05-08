@@ -12,16 +12,13 @@ import {inject, observer} from "mobx-react";
 import toc from "remark-toc";
 import Markdown from "react-markdown";
 
-// 观察者
-@inject('header')
-@observer
-class HomeContent extends BaseComponent {
+class HomeContent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             list: [],
             modalShow: false,
-            languageId:""
+            languageId: ""
         }
 
         this.delItem = {}
@@ -31,15 +28,21 @@ class HomeContent extends BaseComponent {
 
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.getList(nextProps)
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.languageId != this.state.languageId
+    }
 
+    componentWillReceiveProps(nextProps) {
         const {languageId} = nextProps;
-        this.setState({
-            languageId
-        },()=>{
-            this.getList()
-        })
+
+        if (nextProps.languageId != this.state.languageId){
+            this.setState({
+                languageId
+            }, () => {
+                this.getList()
+            })
+        }
+
     }
 
     componentWillUnmount() {
@@ -47,11 +50,9 @@ class HomeContent extends BaseComponent {
     }
 
     getList = async () => {
-        const {header: {person}} = this.props;
         const {languageId} = this.state;
 
         const params = {
-            userId: person.info.userId,
             languageId: languageId
         };
 
@@ -108,6 +109,7 @@ class HomeContent extends BaseComponent {
     render() {
         const {languageContent} = this.props;
         const {list, modalShow} = this.state;
+
         return (
             <div className={"contentRight"}>
                 <div className={"languageContent"}>

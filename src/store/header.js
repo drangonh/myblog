@@ -22,3 +22,4 @@ class HeaderStore {
 
 const header = new HeaderStore();
 export default header
+

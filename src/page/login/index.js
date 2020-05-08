@@ -18,8 +18,8 @@ class index extends React.Component {
     login = () => {
         const params = {userName: this.name.value, passWord: this.pwd.value};
 
-        get("login", params).then(res => {
-            console.log("登录测试::", this.props)
+        post("login", params).then(res => {
+            console.log("登录测试::", res)
             if (res.data) {
                 const {header} = this.props;
                 header.changeInfo(res.data);

@@ -18,6 +18,9 @@ if (process.env.NODE_ENV == 'development') {
     axios.defaults.baseURL = production;
 }
 
+// 允许携带cookie，跨域设置。跨域的时候会造成无法携带cookie，这时需要允许跨域。同时后端也要进行配置
+axios.defaults.withCredentials = true;
+
 // 请求超时时间
 axios.defaults.timeout = 10000;
 

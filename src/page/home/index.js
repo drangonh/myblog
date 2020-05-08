@@ -36,10 +36,9 @@ class App extends BaseComponent {
     getList = async () => {
         const {header: {person}} = this.props;
 
-        const params = {userId: person.info.userId};
+        const params = {};
         const res = await get("getLanguageList", params);
 
-        console.log(res.data)
         if (res.data) {
             this.setState({
                 list: res.data,
@@ -61,20 +60,16 @@ class App extends BaseComponent {
             const params = {
                 languageContent: this.state.content,
                 languageTitle: this.state.title,
-                userId: person.info.userId
             };
-
 
             const res = await post("editLanguage", params)
             if (res.data && res.data.result) {
-
+                this.suspendBtn()
+                this.getList()
             }
         } else {
             this.props.history.push("/login");
         }
-
-        this.suspendBtn()
-        this.getList()
     };
 
     handleChange = (p1) => {
