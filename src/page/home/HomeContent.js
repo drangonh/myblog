@@ -28,9 +28,9 @@ class HomeContent extends React.Component {
 
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.languageId != this.state.languageId
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     // return nextProps.languageId != this.state.languageId
+    // }
 
     componentWillReceiveProps(nextProps) {
         const {languageId} = nextProps;
