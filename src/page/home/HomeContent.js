@@ -18,7 +18,8 @@ class HomeContent extends React.Component {
         this.state = {
             list: [],
             modalShow: false,
-            languageId: ""
+            languageId: "",
+            count: 0//文章总数
         }
 
         this.delItem = {}
@@ -28,14 +29,10 @@ class HomeContent extends React.Component {
 
     }
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     // return nextProps.languageId != this.state.languageId
-    // }
-
     componentWillReceiveProps(nextProps) {
         const {languageId} = nextProps;
 
-        if (nextProps.languageId != this.state.languageId){
+        if (nextProps.languageId != this.state.languageId) {
             this.setState({
                 languageId
             }, () => {
@@ -61,11 +58,13 @@ class HomeContent extends React.Component {
         console.log(res.data)
         if (res.data) {
             this.setState({
-                list: res.data,
+                list: res.data.list,
+                count: res.data.count
             })
         } else {
             this.setState({
                 list: [],
+                count: 0
             })
         }
     };
