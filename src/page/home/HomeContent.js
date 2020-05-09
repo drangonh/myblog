@@ -5,10 +5,8 @@
  **/
 import React from 'react';
 import './index.scss';
-import BaseComponent from "../../components/common/BaseComponent";
-import {Alert, Button, Modal} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import {get, post} from "../../axios";
-import {inject, observer} from "mobx-react";
 import toc from "remark-toc";
 import Markdown from "react-markdown";
 
@@ -50,7 +48,9 @@ class HomeContent extends React.Component {
         const {languageId} = this.state;
 
         const params = {
-            languageId: languageId
+            languageId: languageId,
+            pageSize:10,
+            page:1
         };
 
         const res = await get("getArticleList", params);

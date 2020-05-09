@@ -28,56 +28,11 @@
   overflow-y: auto;
 }
 
-#contentRight {
+.contentRight {
   padding: 10px 10px 0 10px;
   overflow-y: auto;
   flex: 1;
-
-  .languageContent {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .Pagination{
-    height: 100px;
-  }
 }
-
-.content {
-  font-size: $fontCommon;
-  word-break: break-word;
-  display: -webkit-box;
-  border: 1px dashed #333333;
-  padding: 10px;
-  margin-bottom: 20px;
-
-  .contentBotBn {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-
-    .editPage {
-      height: 44px;
-      padding: 0px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .delBtn {
-      color: red;
-    }
-
-    .editBtn {
-      color: #61dafb;
-    }
-
-  }
-}
-
-
-
 
 .leftItem {
   height: 44px;
@@ -90,6 +45,13 @@
 
 .selLeftItem {
   color: cornflowerblue;
+}
+
+.languageContent {
+  display: flex;
+  //justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .type {
@@ -141,3 +103,40 @@ textarea:hover {
 //  outline: none;    // 如何把蓝色去掉？
 //  border: 1px solid #58b195; // 如何改成别的颜色？
 //}
+
+.content {
+  font-size: $fontCommon;
+  word-break: break-word;
+  display: -webkit-box;
+  border: 1px dashed #333333;
+  padding: 10px;
+  margin-bottom: 20px;
+  //-webkit-line-clamp: 2;
+  //-webkit-box-orient: vertical;
+  //overflow : hidden;
+  //text-overflow: ellipsis;
+  //max-height: 100px;
+  //overflow-y: auto;
+}
+
+.contentBotBn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.editPage {
+  height: 44px;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delBtn {
+  color: red;
+}
+
+.editBtn{
+  color: #61dafb;
+}
