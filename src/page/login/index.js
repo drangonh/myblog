@@ -1,6 +1,6 @@
 import React from 'react';
 import "./index.scss"
-import {post,get} from "../../axios"
+import {post, get} from "../../axios"
 import {inject, observer} from "mobx-react";
 
 // 观察者
@@ -18,15 +18,20 @@ class index extends React.Component {
     login = () => {
         const params = {userName: this.name.value, passWord: this.pwd.value};
 
-        post("login", params).then(res => {
-            console.log("登录测试::", res)
-            if (res.data) {
-                const {header} = this.props;
-                header.changeInfo(res.data);
-                this.props.history.push("/home");
-                localStorage.setItem("userInfo", JSON.stringify(res.data))
-            }
-        });
+        get("logout", {}).then(res => {
+            console.log(res);
+
+            post("login", params).then(res => {
+                console.log("登录测试::", res)
+                if (res.data) {
+                    const {header} = this.props;
+                    header.changeInfo(res.data);
+                    this.props.history.push("/home");
+                    localStorage.setItem("userInfo", JSON.stringify(res.data))
+                }
+            });
+        })
+
     };
 
     register = () => {
