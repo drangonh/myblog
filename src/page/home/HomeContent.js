@@ -9,6 +9,7 @@ import {Button, Modal} from "react-bootstrap";
 import {get, post} from "../../axios";
 import toc from "remark-toc";
 import Markdown from "react-markdown";
+import PagingBtn from "../../components/home/PagingBtn";
 
 class HomeContent extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class HomeContent extends React.Component {
     componentWillReceiveProps(nextProps) {
         const {languageId} = nextProps;
 
-        if (nextProps.languageId != this.state.languageId) {
+        if (nextProps.languageId !== this.state.languageId) {
             this.setState({
                 languageId
             }, () => {
@@ -49,8 +50,8 @@ class HomeContent extends React.Component {
 
         const params = {
             languageId: languageId,
-            pageSize:10,
-            page:1
+            pageSize: 10,
+            page: 1
         };
 
         const res = await get("getArticleList", params);
@@ -107,50 +108,60 @@ class HomeContent extends React.Component {
 
     render() {
         const {languageContent} = this.props;
-        const {list, modalShow} = this.state;
+        const {list, modalShow,count} = this.state;
 
         return (
-            <div className={"contentRight"}>
-                <div className={"languageContent"}>
-                    简介： {languageContent}
-                </div>
+            <div className={"homeContainer"}>
+                <div className={"homeContentRight"}>
+                    <div className={"languageContent"}>
+                        简介： {languageContent}
+                    </div>
 
-                {
-                    list.map((item, index) => {
-                        return (
-                            <div key={item.contentId} className={"content"} onClick={() => this.openPage(item, false)}>
-                                <Markdown
-                                    source={item.brief}
-                                    skipHtml={this.state.htmlMode === 'skip'}
-                                    escapeHtml={this.state.htmlMode === 'escape'}
-                                    plugins={[toc]}
-                                />
+                    {
+                        list.map((item, index) => {
+                            return (
+                                <div key={item.contentId} className={"content"}
+                                     onClick={() => this.openPage(item, false)}>
+                                    <Markdown
+                                        source={item.brief}
+                                        skipHtml={this.state.htmlMode === 'skip'}
+                                        escapeHtml={this.state.htmlMode === 'escape'}
+                                        plugins={[toc]}
+                                    />
 
-                                <div className={"contentBotBn"}>
-                                    <div className={"editPage editBtn"} onClick={() => this.openPage(item, true)}>
-                                        编辑
-                                    </div>
+                                    <div className={"contentBotBn"}>
+                                        <div className={"editPage editBtn"} onClick={() => this.openPage(item, true)}>
+                                            编辑
+                                        </div>
 
-                                    <div className={"editPage delBtn"} onClick={(e) => {
-                                        this.delItem = item;
-                                        this.setModalShow(true, e)
-                                    }}>
-                                        删除
+                                        <div className={"editPage delBtn"} onClick={(e) => {
+                                            this.delItem = item;
+                                            this.setModalShow(true, e)
+                                        }}>
+                                            删除
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
 
-                <DeleteModal
-                    show={modalShow}
-                    onHide={(e) => {
-                        this.setModalShow(false, e)
+                    <DeleteModal
+                        show={modalShow}
+                        onHide={(e) => {
+                            this.setModalShow(false, e)
+                        }}
+                        delArticle={(e) => this.delArticle(this.delItem, e)}
+                    />
+
+                </div>
+
+                <PagingBtn
+                    total={count/10}
+                    nextBtn={() => {
                     }}
-                    delArticle={(e) => this.delArticle(this.delItem, e)}
-                />
 
+                />
             </div>
         );
     }
@@ -185,3 +196,7 @@ function DeleteModal(props) {
 }
 
 export default HomeContent;
+
+
+
+

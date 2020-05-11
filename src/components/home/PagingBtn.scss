@@ -1,0 +1,32 @@
+#pagingBtn {
+  height: 5rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow-x: auto;
+
+  .middleView {
+   flex: 1;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+
+  .item {
+    width: 50px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: blue;
+  }
+
+  .preBtn {
+    color: #333333;
+  }
+
+}
+
+
+
+

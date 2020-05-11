@@ -19,7 +19,6 @@ class index extends React.Component {
         const params = {userName: this.name.value, passWord: this.pwd.value};
 
         get("logout", {}).then(res => {
-            console.log(res);
 
             post("login", params).then(res => {
                 console.log("登录测试::", res)
