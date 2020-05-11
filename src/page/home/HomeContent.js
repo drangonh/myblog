@@ -19,8 +19,9 @@ class HomeContent extends React.Component {
             modalShow: false,
             languageId: "",
             count: 0//文章总数
-        }
+        };
 
+        this.page = 1;
         this.delItem = {}
     }
 
@@ -51,7 +52,7 @@ class HomeContent extends React.Component {
         const params = {
             languageId: languageId,
             pageSize: 10,
-            page: 1
+            page: this.page
         };
 
         const res = await get("getArticleList", params);
@@ -108,7 +109,7 @@ class HomeContent extends React.Component {
 
     render() {
         const {languageContent} = this.props;
-        const {list, modalShow,count} = this.state;
+        const {list, modalShow, count} = this.state;
 
         return (
             <div className={"homeContainer"}>
@@ -157,8 +158,10 @@ class HomeContent extends React.Component {
                 </div>
 
                 <PagingBtn
-                    total={count/10}
-                    nextBtn={() => {
+                    total={count / 10}
+                    onPress={(page) => {
+                        this.page = page;
+                        this.getList()
                     }}
 
                 />

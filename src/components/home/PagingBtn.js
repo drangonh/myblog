@@ -16,7 +16,7 @@ class MiddleViewItem extends React.Component {
         const {txt, onPress} = this.props;
 
         return (
-            <div className={"item"} onClick={() => onPress && onPress()}>
+            <div className={"item"} onClick={() => onPress && onPress(txt)}>
                 {txt}
             </div>
         )
@@ -27,7 +27,7 @@ class MiddleView extends React.Component {
     static propTypes = {
         start: PropTypes.number.isRequired,
         total: PropTypes.number.isRequired,
-        preBtn: PropTypes.func
+        onPress: PropTypes.func
     };
 
     constructor(props) {
@@ -57,6 +57,7 @@ class MiddleView extends React.Component {
 
     render() {
         const {arr} = this.state;
+        const {onPress} = this.props;
         return (
             <div className={"middleView"}>
                 {
@@ -65,8 +66,8 @@ class MiddleView extends React.Component {
                             <MiddleViewItem
                                 txt={item.txt}
                                 key={item.key}
-                                onPress={() => {
-
+                                onPress={(txt) => {
+                                    onPress && onPress(txt)
                                 }}
                             />
                         )
@@ -88,7 +89,9 @@ class PagingBtn extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+
+        };
     }
 
     addType = () => {
@@ -112,6 +115,9 @@ class PagingBtn extends React.Component {
                 <MiddleView
                     start={1}
                     total={total}
+                    onPress={(page) => {
+                        onPress && onPress(page)
+                    }}
                 />
             </div>
         );
