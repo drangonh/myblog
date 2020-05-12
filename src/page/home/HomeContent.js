@@ -55,7 +55,7 @@ class HomeContent extends React.Component {
             page: this.page
         };
 
-        const res = await get("getArticleList", params);
+        const res = await get("markdownStore/getArticleList", params);
 
         console.log(res.data)
         if (res.data) {
@@ -97,7 +97,7 @@ class HomeContent extends React.Component {
             contentId: item.contentId
         };
 
-        const res = await post("deleteArticle", params);
+        const res = await post("markdownStore/deleteArticle", params);
 
         if (res.data) {
             this.setModalShow(false, e)

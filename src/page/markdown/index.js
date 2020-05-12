@@ -54,7 +54,7 @@ class Index extends React.PureComponent {
             contentId: state.item.contentId,
         };
 
-        const res = await get("getArticleDetail", params)
+        const res = await get("markdownStore/getArticleDetail", params)
         console.log(res.data);
 
 
@@ -104,7 +104,7 @@ class Index extends React.PureComponent {
             contentId: detail ? detail.contentId : 0
         };
 
-        const res = await post("editArticle", params)
+        const res = await post("markdownStore/editArticle", params)
         console.log(res)
 
         if (res && res.data && res.data.result) {

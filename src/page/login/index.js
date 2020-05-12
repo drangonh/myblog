@@ -18,9 +18,9 @@ class index extends React.Component {
     login = () => {
         const params = {userName: this.name.value, passWord: this.pwd.value};
 
-        get("logout", {}).then(res => {
+        get("user/logout", {}).then(res => {
 
-            post("login", params).then(res => {
+            post("user/login", params).then(res => {
                 console.log("登录测试::", res)
                 if (res.data) {
                     const {header} = this.props;
@@ -40,7 +40,7 @@ class index extends React.Component {
             ConfirmPassword: this.confirmPwd.value
         };
 
-        post("register", params).then(res => {
+        post("user/register", params).then(res => {
             console.log(res)
             if (res.data) {
                 const {header} = this.props;

@@ -6,8 +6,8 @@ import QS from 'qs';
 // import {Toast} from 'vant';
 // import store from '../store/index'
 
-const development = "http://127.0.0.1:8888/";
-const production = "https://www.dontheway.com:8880/";
+const development = "http://127.0.0.1:8888/blog/";
+const production = "https://www.dontheway.com:8880/blog/";
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {

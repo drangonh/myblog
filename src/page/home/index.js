@@ -36,7 +36,7 @@ class App extends BaseComponent {
         const {header: {person}} = this.props;
 
         const params = {};
-        const res = await get("getLanguageList", params);
+        const res = await get("language/getLanguageList", params);
 
         if (res.data) {
             this.setState({
@@ -61,7 +61,7 @@ class App extends BaseComponent {
                 languageTitle: this.state.title,
             };
 
-            const res = await post("editLanguage", params)
+            const res = await post("language/editLanguage", params)
             if (res.data && res.data.result) {
                 this.suspendBtn()
                 this.getList()
