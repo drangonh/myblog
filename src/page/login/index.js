@@ -71,7 +71,7 @@ class index extends React.Component {
                 />
 
                 <input
-                    type="text"
+                    type="password"
                     ref={ref => this.pwd = ref}
                     className={"editValue pwdMarginName"}
                     placeholder={"请输入密码"}
@@ -80,7 +80,7 @@ class index extends React.Component {
                 <input
                     hidden={login}
                     ref={ref => this.confirmPwd = ref}
-                    type="text"
+                    type="password"
                     className={"editValue pwdMarginName"}
                     placeholder={"请再次输入密码"}
                 />

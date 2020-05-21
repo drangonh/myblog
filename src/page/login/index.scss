@@ -8,6 +8,7 @@ $inputColor: #9195ad;
   align-items: center;
   justify-content: center;
   height: 100%;
+  background-color: rgba(0, 179, 138, 1);
 }
 
 .editValue {
@@ -61,18 +62,19 @@ css中2个冒zhidao号是伪元素，其实和1个冒号的效果是一样的，
 }
 
 .loginBtn {
-  width: 320px;
-  height: 50px;
+  width: 300px;
+  height: 44px;
   font-size: $fontMax;
   font-family: $fontFamily;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #333;
-  color: white;
+  background-color: #FFF;
+  color: rgba(0, 179, 138, 1);
   border-radius: 10px;
 }
 
 .register{
   text-decoration: underline;
+  color: #FFF;
 }
