@@ -3,7 +3,7 @@ import {lazy} from "react";
 import Loading from "../components/common/Loading"
 
 const Home = lazy(() => import("../page/home/index"));
-const Login = lazy(() => import("../page/login/index"));
+const Login = lazy(() => import("../page/login/index_1"));
 const Markdown = lazy(() => import("../page/markdown/index"));
 const ArticleDetail = lazy(() => import("../page/home/ArticleDetail"));
 

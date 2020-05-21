@@ -1,0 +1,179 @@
+#loginPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #FFFFFF;
+  align-items: center;
+
+  .box_1X1 {
+    width: 100%;
+    height: 360px;
+    color: rgba(80, 80, 80, 1);
+    background-color: rgba(0, 179, 138, 1);
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+  }
+
+  //中间方块
+  .box_2X1 {
+    width: 700px;
+    height: 467px;
+    color: rgba(80, 80, 80, 1);
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 1px;
+    font-size: 14px;
+    line-height: 150%;
+    border: rgba(220, 225, 230, 1) solid 1px;
+    margin-top: -205px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    //左边
+    .wrapper_2X1 {
+      width: 420px;
+      height: 300px;
+      border-right: rgba(229, 229, 229, 1) 1px solid;
+      display: flex;
+      flex-direction: column;
+
+      .wrapper_2X2 {
+        width: 300px;
+        height: 35px;
+        display: flex;
+        flex-direction: row;
+
+        .wrapper_2X3 {
+          flex: 1;
+          color: rgba(0, 179, 138, 1);
+          font-size: 16px;
+          line-height: 150%;
+          border-bottom: rgba(0, 179, 138, 1) 1px solid;
+        }
+
+        .wrapper_2X4 {
+          flex: 1;
+          color: rgba(56, 56, 56, 1);
+          font-size: 16px;
+          line-height: 150%;
+        }
+      }
+
+      .text_12X1 {
+        width: 300px;
+        height: 40px;
+        color: rgba(166, 166, 166, 1);
+        font-size: 14px;
+        line-height: 150%;
+        text-align: left;
+        margin-top: 40px;
+        border-bottom: rgba(229, 229, 229, 1) 1px solid;
+
+        .editValue {
+          //去掉默认样式
+          web-kit-appearance: none;
+          -moz-appearance: none;
+
+          border: 0; // 去除未选中状态边框
+          outline: none; // 去除选中状态边框
+          background-color: rgba(0, 0, 0, 0); // 透明背景background-color: rgba(0, 0, 0, 0);// 透明背景
+
+          width: 100%;
+          height: 100%;
+          text-indent: 15px;
+        }
+      }
+
+      .margin-top28 {
+        margin-top: 28px;
+      }
+
+      .box_202 {
+        margin-top: 16px;
+        width: 301px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        .text_17X1 {
+          width: 64px;
+          height: 21px;
+          left: 672px;
+          top: 430px;
+          color: rgba(0, 179, 138, 1);
+          font-size: 14px;
+          line-height: 150%;
+          text-align: left;
+        }
+      }
+
+      .text_18X1 {
+        width: 301px;
+        height: 48px;
+        color: rgba(255, 255, 255, 1);
+        background-color: rgba(0, 179, 138, 1);
+        border-radius: 2px;
+        font-size: 16px;
+        line-height: 150%;
+        margin-top: 32px;
+      }
+    }
+
+    //右边
+    .box_203 {
+      flex: 1;
+      flex-direction: column;
+
+      .text_21X1 {
+        width: 144px;
+        height: 21px;
+        left: 842px;
+        top: 418px;
+        color: rgba(80, 80, 80, 1);
+        font-size: 14px;
+        line-height: 150%;
+        text-align: left;
+      }
+
+      .box_204 {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        justify-content: center;
+
+        .wechat{
+          width: 20px;
+          height: 16px;
+        }
+
+        .margin-right20{
+          margin-right: 20px;
+        }
+
+        .qq{
+          width: 14px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+
+.uac_jc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uac {
+  display: flex;
+  align-items: center;
+}
+
+.ujc {
+  display: flex;
+  justify-content: center;
+}
