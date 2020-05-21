@@ -8,7 +8,7 @@ class CommonLeft extends React.Component {
 
     render() {
         return (
-            <div className={"left"}>
+            <div id={"commonLeft"}>
 
                 <div className={"box_278X1"}>
                     <div className={"photo"}>
