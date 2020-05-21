@@ -1,0 +1,122 @@
+#updateInfo {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: rgba(0, 179, 138, 1);
+  align-items: center;
+
+  .box_6747X3{
+    width: 441px;
+    height: 636px;
+    left: 500px;
+    top: 82px;
+    color: rgba(80, 80, 80, 1);
+    background-color: rgba(255, 255, 255, 1);
+    font-size: 14px;
+    line-height: 150%;
+    text-align: center;
+    margin-top: 82px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .text_6746X3{
+      width: 98px;
+      height: 21px;
+      margin-top: 24px;
+      margin-left: 24px;
+      color: rgba(80, 80, 80, 1);
+      font-size: 14px;
+      line-height: 150%;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .text_12X1 {
+      width: 300px;
+      height: 40px;
+      color: rgba(166, 166, 166, 1);
+      font-size: 14px;
+      line-height: 150%;
+      text-align: left;
+      margin-top: 20px;
+      border-bottom: rgba(229, 229, 229, 1) 1px solid;
+
+      .editValue {
+        //去掉默认样式
+        web-kit-appearance: none;
+        -moz-appearance: none;
+
+        border: 0; // 去除未选中状态边框
+        outline: none; // 去除选中状态边框
+        background-color: rgba(0, 0, 0, 0); // 透明背景background-color: rgba(0, 0, 0, 0);// 透明背景
+
+        width: 100%;
+        height: 100%;
+        text-indent: 15px;
+      }
+    }
+
+    .text_12X2 {
+      margin-top: 20px;
+      width: 300px;
+      height: 250px;
+      color: rgba(80, 80, 80, 1);
+      background-color: rgba(246, 246, 246, 1);
+      font-size: 14px;
+      line-height: 150%;
+      text-align: center;
+      border: rgba(229, 229, 229, 1) 1px solid;
+
+      .editValue {
+        //去掉默认样式
+        web-kit-appearance: none;
+        -moz-appearance: none;
+
+        border: 0; // 去除未选中状态边框
+        outline: none; // 去除选中状态边框
+        background-color: rgba(0, 0, 0, 0); // 透明背景background-color: rgba(0, 0, 0, 0);// 透明背景
+
+        width: 100%;
+        height: 100%;
+
+        word-break: break-word;
+
+        padding: 15px;
+      }
+    }
+
+    .text_18X1 {
+      width: 301px;
+      height: 48px;
+      color: rgba(255, 255, 255, 1);
+      background-color: rgba(0, 179, 138, 1);
+      border-radius: 2px;
+      font-size: 16px;
+      line-height: 150%;
+      margin-top: 32px;
+    }
+  }
+
+  img{
+    width: 58px;
+    height: 58px;
+    border-radius: 30px;
+  }
+}
+
+.uac_jc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uac {
+  display: flex;
+  align-items: center;
+}
+
+.ujc {
+  display: flex;
+  justify-content: center;
+}

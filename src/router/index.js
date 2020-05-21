@@ -6,6 +6,7 @@ const Home = lazy(() => import("../page/home/index"));
 const Login = lazy(() => import("../page/login/index_1"));
 const Markdown = lazy(() => import("../page/markdown/index"));
 const ArticleDetail = lazy(() => import("../page/home/ArticleDetail"));
+const UpdateUserInfo = lazy(() => import("../page/home/UpdateUserInfo"));
 
 const routers = [
     {
@@ -26,6 +27,11 @@ const routers = [
     {
         component: ArticleDetail,
         route: "/articleDetail",
+        loadingComponent: Loading
+    },
+    {
+        component: UpdateUserInfo,
+        route: "/updateInfo",
         loadingComponent: Loading
     },
 ];

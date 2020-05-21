@@ -1,198 +1,114 @@
-/**
- * 首页
- * author:dragonh
- * time:2020/4/30
- **/
 import React from 'react';
-import './ArticleDetail.scss';
-import BaseComponent from "../../components/common/BaseComponent";
-import {post, get} from "../../axios";
+import "./UpdateUserInfo.scss"
+import {post, get} from "../../axios"
 import {inject, observer} from "mobx-react";
 
 // 观察者
 @inject('header')
 @observer
-class App extends BaseComponent {
+
+class UpdateUserInfo extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            showModal: false,
-            title: "",
-            content: "",
-            list: [],
-            selType: {}
+            login: true,//为true时代表登录，否则为注册
         }
     }
 
-    componentDidMount() {
-        this.getList()
-    }
+    login = () => {
+        const params = {userName: this.name.value, passWord: this.pwd.value};
 
-    getList = async () => {
-        const {header: {person}} = this.props;
+        get("user/logout", {}).then(res => {
 
-        const params = {};
-        const res = await get("language/getLanguageList", params);
-
-        if (res.data) {
-            this.setState({
-                list: res.data,
-                selType: res.data.length != 0 ? res.data[0] : {}
-            })
-        }
-    };
-
-    suspendBtn = () => {
-        this.setState({
-            showModal: !this.state.showModal
+            post("user/login", params).then(res => {
+                console.log("登录测试::", res)
+                if (res.data) {
+                    const {header} = this.props;
+                    header.changeInfo(res.data);
+                    this.props.history.push("/home");
+                    localStorage.setItem("userInfo", JSON.stringify(res.data))
+                }
+            });
         })
+
     };
 
-    commit = async () => {
-        const {header: {person}} = this.props;
+    register = () => {
+        const params = {
+            Username: this.name.value,
+            Password: this.pwd.value,
+            ConfirmPassword: this.confirmPwd.value
+        };
 
-        if (person.info) {
-            const params = {
-                languageContent: this.state.content,
-                languageTitle: this.state.title,
-            };
-
-            const res = await post("language/editLanguage", params)
-            if (res.data && res.data.result) {
-                this.suspendBtn()
-                this.getList()
-            }
-        } else {
-            this.props.history.push("/login");
-        }
-    };
-
-    handleChange = (p1) => {
-        this.setState({
-            title: p1.target.value
-        })
-    };
-
-    changeContent = (p1) => {
-        this.setState({
-            content: p1.target.value
-        })
-    };
-
-    publish = () => {
-        this.props.history.push({
-            pathname: "/markdown",
-            state: {
-                list: this.state.list,
-                publish: true
+        post("user/register", params).then(res => {
+            console.log(res)
+            if (res.data) {
+                const {header} = this.props;
+                header.changeInfo(res.data);
+                this.props.history.push("/home");
+                localStorage.setItem("userInfo", JSON.stringify(res.data))
             }
         });
     };
 
-    //改变选中的语言
-    changeSelType = (item) => {
-        this.setState({
-            selType: item
-        })
+    changeState = () => {
+        this.setState((preState, props) => {
+                return {
+                    login: !this.state.login
+                }
+            }
+        )
     };
 
     render() {
-        const {list, selType} = this.state;
+        const {login} = this.state;
         return (
-            <div id="articleDetail">
-                <div className={"left"}>
+            <div id={"updateInfo"}>
 
-                    <div className={"box_278X1"}>
-                        <div className={"photo"}>
+                <div className={"box_6747X3"}>
 
-                        </div>
+                    <p className={"text_6746X3"}>
+                        请填写基本信息
+                    </p>
 
-                        <h4>Web Bolg</h4>
+                    <img
+                        className={"default"}
+                        src={require("../../static/image/defualt.jpeg")}
+                    />
 
-                        <p>
-                            Only the harvest，to test the significance of the work；
-                            only the contribution，
-                            the value of the square
-                            can be measured。
-                        </p>
+                    <div className={"text_12X1"}>
+                        <input
+                            placeholder={"请输入昵称"}
+                            type={"text"}
+                            className={"editValue"}
+                        />
                     </div>
 
-                    <div className={"box_275X1"}>
-                        <div className={"wrapper_118X1"}>
-                            <div className={"text_268X1"}>1</div>
-                            <div className={"text_269X1"}>文章</div>
-                        </div>
-
-                        <div className={"wrapper_118X1"}>
-                            <div className={"text_268X1"}>1</div>
-                            <div className={"text_269X1"}>分类</div>
-                        </div>
-
-                        <div className={"wrapper_118X1"}>
-                            <div className={"text_268X1"}>1</div>
-                            <div className={"text_269X1"}>Tags</div>
-                        </div>
+                    <div className={"text_12X1"}>
+                        <input
+                            placeholder={"请输入邮箱"}
+                            type={"text"}
+                            className={"editValue"}
+                        />
                     </div>
 
-                </div>
+                    <div className={"text_12X2"}>
+                        <textarea
+                            placeholder={"请输入个人介绍"}
+                            type={"text"}
+                            className={"editValue"}
+                        />
+                    </div>
 
-                <div className={"box_286X1"}></div>
-
-                <div className={"right"}>
-                    <div className={"box_387X1"}>
-                        <div className={"text_388X1"}>
-                            标题标题标题
-                        </div>
-
-
-                        <div className={"box_200"}>
-                            <div className={"text_420X1"}>Javascript</div>
-                            <div className={"text_420X1"}>Javascript</div>
-                            <div className={"text_420X1"}>Javascript</div>
-                        </div>
-
-                        <div className={"text_393X1"}>
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            。。。。。。
-                        </div>
-
-                        <div className={"box_201"}>
-                            <div className={"box_202"}>
-                                <div className={"icon_7X1"}>
-                                    {"<"}
-                                </div>
-
-                                <div className={"text_436X1"}>上一篇文章标题</div>
-                            </div>
-
-                            <div className={"box_202"}>
-                                <div className={"text_436X1"}>下一篇文章标题</div>
-
-                                <div className={"icon_7X1"}>
-                                    {">"}
-                                </div>
-                            </div>
-                        </div>
+                    <div className={"text_18X1 uac_jc"}>
+                        完 成
                     </div>
                 </div>
+
             </div>
-        );
+        )
     }
 }
 
-export default App;
+
+export default UpdateUserInfo
