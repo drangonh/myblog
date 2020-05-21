@@ -13,9 +13,11 @@ import {post, get} from "../../axios";
 import {inject, observer} from "mobx-react";
 import HomeContent from "./HomeContent";
 import CommonLeft from "../../components/common/CommonLeft";
+import commonLeft from "../../store/commonLeft";
 
 // 观察者
 @inject('header')
+@inject('commonLeft')
 @observer
 class App extends BaseComponent {
     constructor(props) {
@@ -34,7 +36,7 @@ class App extends BaseComponent {
     }
 
     getList = async () => {
-        const {header: {person}} = this.props;
+        const {commonLeft} = this.props;
 
         const params = {};
         const res = await get("language/getLanguageList", params);
@@ -44,6 +46,9 @@ class App extends BaseComponent {
                 list: res.data,
                 selType: res.data.length != 0 ? res.data[0] : {}
             })
+
+            const {commonLeft} = this.props;
+            commonLeft.changeInfo(res.data);
         }
     };
 

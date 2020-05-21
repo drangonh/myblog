@@ -11,6 +11,7 @@ import header from "../../store/header";
 
 // 观察者
 @inject('header')
+@inject('commonLeft')
 @observer
 class Header extends React.Component {
     constructor(props) {
@@ -36,15 +37,6 @@ class Header extends React.Component {
 
                 <div className={"right"}>
 
-                    {/*<img*/}
-                        {/*className={"list"}*/}
-                        {/*src={require("../../static/image/list.png")}*/}
-                    {/*/>*/}
-
-                    {/*<img*/}
-                        {/*className={"home"}*/}
-                        {/*src={require("../../static/image/home.png")}*/}
-                    {/*/>*/}
                 </div>
             </div>
         );
