@@ -204,10 +204,10 @@
         .icon_7X1 {
           width: 21px;
           height: 21px;
-          font-size: 21px;
-          color: rgba(153, 153, 153, 1);
-          background-color: #282c34;
-          margin-left: 20px;
+          color: #333;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
 
         .text_436X1{

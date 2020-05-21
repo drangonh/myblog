@@ -174,16 +174,18 @@ class App extends BaseComponent {
                         <div className={"box_201"}>
                             <div className={"box_202"}>
                                 <div className={"icon_7X1"}>
+                                    {"<"}
                                 </div>
 
                                 <div className={"text_436X1"}>上一篇文章标题</div>
                             </div>
 
                             <div className={"box_202"}>
-                                <div className={"icon_7X1"}>
-                                </div>
-
                                 <div className={"text_436X1"}>下一篇文章标题</div>
+
+                                <div className={"icon_7X1"}>
+                                    {">"}
+                                </div>
                             </div>
                         </div>
                     </div>
