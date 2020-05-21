@@ -36,7 +36,9 @@ class Header extends React.Component {
                 </div>
 
                 <div className={"right"}>
+                    <div className={"box_642X1"}>
 
+                    </div>
                 </div>
             </div>
         );

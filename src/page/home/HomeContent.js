@@ -10,7 +10,10 @@ import {get, post} from "../../axios";
 import toc from "remark-toc";
 import Markdown from "react-markdown";
 import PagingBtn from "../../components/home/PagingBtn";
+import {inject, observer} from "mobx-react";
 
+@inject('commonLeft')
+@observer
 class HomeContent extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +21,8 @@ class HomeContent extends React.Component {
             list: [],
             modalShow: false,
             languageId: "",
-            count: 0//文章总数
+            count: 0,//文章总数
+            selType: {}
         };
 
         this.page = 1;
@@ -26,31 +30,35 @@ class HomeContent extends React.Component {
     }
 
     componentDidMount() {
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-        const {languageId} = nextProps;
-
-        if (nextProps.languageId !== this.state.languageId) {
-            this.setState({
-                languageId
-            }, () => {
-                this.getList()
-            })
-        }
-
+        this.getCategoryList()
+        this.getList()
     }
 
     componentWillUnmount() {
         this.delItem = {}
     }
 
+    getCategoryList = async () => {
+        const params = {};
+        const res = await get("language/getLanguageList", params);
+
+        if (res.data) {
+            this.setState({
+                list: res.data,
+                selType: res.data.length != 0 ? res.data[0] : {},
+                languageId: res.data[0].languageId
+            })
+
+            const {commonLeft} = this.props;
+            commonLeft.changeInfo(res.data);
+        }
+    }
+
     getList = async () => {
         const {languageId} = this.state;
 
         const params = {
-            languageId: languageId,
+            languageId: languageId,//0:默認查詢全部
             pageSize: 10,
             page: this.page
         };
@@ -76,6 +84,16 @@ class HomeContent extends React.Component {
             modalShow: res
         });
         e && e.stopPropagation()
+    };
+
+    //改变选中的语言
+    changeSelType = (item) => {
+        this.setState({
+            selType: item,
+            languageId: item.languageId
+        }, () => {
+            this.getList()
+        })
     };
 
     //跳转到文章详情页
@@ -108,15 +126,48 @@ class HomeContent extends React.Component {
     };
 
     render() {
-        const {languageContent} = this.props;
-        const {list, modalShow, count} = this.state;
+        const {commonLeft} = this.props;
+        const {list, modalShow, count, selType} = this.state;
 
         return (
             <div className={"homeContainer"}>
-                <div className={"homeContentRight"}>
-                    <div className={"languageContent"}>
-                        简介： {languageContent}
+
+                <div className={"box_642X1"}>
+
+                    <div className={"box_642X1_list"}>
+                        {
+                            commonLeft.data.map((item) => {
+                                if (selType && selType.languageId == item.languageId || !selType.languageId) {
+                                    return (
+                                        <div
+                                            onClick={() => this.changeSelType(item)}
+                                            key={item.languageId}
+                                            className={"text_825X1"}>
+                                            {item.languageTitle}
+                                            <div className={"box_823X1"}/>
+                                        </div>
+                                    )
+                                }
+
+                                return (
+                                    <div className={"text_824X1"}>
+                                        前端
+                                    </div>
+                                )
+
+                            })
+                        }
+
                     </div>
+
+                    <div className={"languageContent"}>
+                        简介： {selType.languageContent}
+                    </div>
+                </div>
+
+
+                <div className={"homeContentRight"}>
+
 
                     {
                         list.map((item, index) => {

@@ -36,8 +36,6 @@ class App extends BaseComponent {
     }
 
     getList = async () => {
-        const {commonLeft} = this.props;
-
         const params = {};
         const res = await get("language/getLanguageList", params);
 
@@ -99,19 +97,12 @@ class App extends BaseComponent {
         });
     };
 
-    //改变选中的语言
-    changeSelType = (item) => {
-        this.setState({
-            selType: item
-        })
-    };
-
     render() {
         const {list, selType} = this.state;
         return (
             <div className="wrap">
 
-                <Header {...this.props}/>
+                {/*<Header {...this.props}/>*/}
 
                 <div className={"homeContent"}>
 
@@ -126,9 +117,9 @@ class App extends BaseComponent {
                 </div>
 
                 {/*悬浮按钮*/}
-                <SuspendBtn
-                    publish={this.publish}
-                    suspendBtn={this.suspendBtn}/>
+                {/*<SuspendBtn*/}
+                {/*    publish={this.publish}*/}
+                {/*    suspendBtn={this.suspendBtn}/>*/}
 
                 {this.renderModal()}
             </div>

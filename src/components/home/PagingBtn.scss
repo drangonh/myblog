@@ -4,26 +4,37 @@
   flex-direction: row;
   width: 100%;
   overflow-x: auto;
+  align-items: center;
 
   .middleView {
-   flex: 1;
+    flex: 1;
     display: flex;
     flex-direction: row;
     height: 100%;
-  }
-
-  .item {
-    width: 50px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
     align-items: center;
-    color: blue;
+
+    .text_862X1 {
+      width: 36px;
+      height: 36px;
+      color: rgba(243, 246, 247, 1);
+      font-size: 14px;
+      line-height: 150%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 20px;
+    }
+
+    .text_862X1_radius{
+      background-color: rgba(96, 125, 139, 1);
+      border-radius: 18px;
+    }
+
+    .preBtn {
+      color: rgba(96, 125, 139, 1);
+    }
   }
 
-  .preBtn {
-    color: #333333;
-  }
 
 }
 

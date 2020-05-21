@@ -1,16 +1,16 @@
 import {observable, action} from 'mobx';
 
 class CommonLeftStore {
-    @observable userInfo;
+    @observable data;
 
     @action
     changeInfo = obj => {
         console.log("獲取分類：：：：", obj)
-        this.userInfo = obj;
+        this.data = obj;
     };
 
     constructor() {
-        this.userInfo = {}
+        this.data = []
     }
 }
 

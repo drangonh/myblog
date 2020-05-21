@@ -16,7 +16,7 @@ class MiddleViewItem extends React.Component {
         const {txt, onPress} = this.props;
 
         return (
-            <div className={"item"} onClick={() => onPress && onPress(txt)}>
+            <div className={"text_862X1 text_862X1_radius"} onClick={() => onPress && onPress(txt)}>
                 {txt}
             </div>
         )
@@ -106,12 +106,12 @@ class PagingBtn extends React.Component {
         return (
             <div id="pagingBtn">
                 <MiddleViewItem
-                    className={"preBtn"}
-                    txt={"<<"}
+                    txt={"<"}
                     onPress={() => {
                         onPress && onPress()
                     }}
                 />
+
                 <MiddleView
                     start={1}
                     total={total}
