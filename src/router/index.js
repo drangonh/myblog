@@ -5,6 +5,7 @@ import Loading from "../components/common/Loading"
 const Home = lazy(() => import("../page/home/index"));
 const Login = lazy(() => import("../page/login/index"));
 const Markdown = lazy(() => import("../page/markdown/index"));
+const ArticleDetail = lazy(() => import("../page/home/ArticleDetail"));
 
 const routers = [
     {
@@ -20,6 +21,11 @@ const routers = [
     {
         component: Markdown,
         route: "/markdown",
+        loadingComponent: Loading
+    },
+    {
+        component: ArticleDetail,
+        route: "/articleDetail",
         loadingComponent: Loading
     },
 ];
