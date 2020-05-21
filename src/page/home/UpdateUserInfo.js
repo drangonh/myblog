@@ -136,6 +136,8 @@ class App extends BaseComponent {
 
                 </div>
 
+                <div className={"box_286X1"}></div>
+
                 <div className={"right"}>
                     <div className={"box_387X1"}>
                         <div className={"text_388X1"}>

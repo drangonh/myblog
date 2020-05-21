@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    border-right:  rgba(0, 0, 0, 0.1) solid 1px;;
 
     .box_278X1 {
       width: 225px;
@@ -104,17 +104,6 @@
 
   }
 
-  .box_286X1 {
-    width: 0.5px;
-    height: 100%;
-    color: rgba(80, 80, 80, 1);
-    background-color: rgba(243, 246, 247, 1);
-    font-size: 14px;
-    line-height: 150%;
-    border: rgba(0, 0, 0, 0.1) solid 1px;
-    text-align: center;
-  }
-
   .right {
     flex: 1;
     height: 100%;
@@ -197,7 +186,7 @@
       justify-content: space-between;
       padding-right: 31px;
 
-      .box_202{
+      .box_202 {
         display: flex;
         flex-direction: row;
 
@@ -210,7 +199,7 @@
           align-items: center;
         }
 
-        .text_436X1{
+        .text_436X1 {
           width: 98px;
           height: 21px;
           left: 338px;
