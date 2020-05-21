@@ -87,6 +87,7 @@ class index extends React.Component {
                                 placeholder={"请输入常用账号"}
                                 type={"text"}
                                 className={"editValue"}
+                                ref={ref => this.name = ref}
                             />
                         </div>
 
@@ -95,6 +96,7 @@ class index extends React.Component {
                                 placeholder={"请输入密码"}
                                 type={"password"}
                                 className={"editValue"}
+                                ref={ref => this.pwd = ref}
                             />
                         </div>
 
@@ -104,7 +106,9 @@ class index extends React.Component {
                             </div>
                         </div>
 
-                        <div className={"text_18X1 uac_jc"}>
+                        <div
+                            onClick={login ? this.login : this.register}
+                            className={"text_18X1 uac_jc"}>
                             登 录
                         </div>
                     </div>

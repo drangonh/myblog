@@ -12,6 +12,7 @@ import {Button, FormControl, Modal} from "react-bootstrap";
 import {post, get} from "../../axios";
 import {inject, observer} from "mobx-react";
 import HomeContent from "./HomeContent";
+import CommonLeft from "../../components/common/CommonLeft";
 
 // 观察者
 @inject('header')
@@ -109,19 +110,7 @@ class App extends BaseComponent {
 
                 <div className={"homeContent"}>
 
-                    <div className={"contentLeft"}>
-
-
-                        {list.map((item, index) => {
-                            return (
-                                <div onClick={() => this.changeSelType(item)}
-                                     className={selType.languageId == item.languageId ? "leftItem selLeftItem" : "leftItem"}
-                                     key={item.languageId}>
-                                    {item.languageTitle}
-                                </div>
-                            )
-                        })}
-                    </div>
+                    <CommonLeft/>
 
                     <HomeContent
                         types={list}
