@@ -35,9 +35,9 @@ class index extends React.Component {
 
     register = () => {
         const params = {
-            Username: this.name.value,
-            Password: this.pwd.value,
-            ConfirmPassword: this.confirmPwd.value
+            userName: this.name.value,
+            passWord: this.pwd.value,
+            confirmPassWord: this.confirmPwd.value
         };
 
         post("user/register", params).then(res => {

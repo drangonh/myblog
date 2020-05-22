@@ -117,9 +117,9 @@ class App extends BaseComponent {
                 </div>
 
                 {/*悬浮按钮*/}
-                {/*<SuspendBtn*/}
-                {/*    publish={this.publish}*/}
-                {/*    suspendBtn={this.suspendBtn}/>*/}
+                <SuspendBtn
+                    publish={this.publish}
+                    suspendBtn={this.suspendBtn}/>
 
                 {this.renderModal()}
             </div>

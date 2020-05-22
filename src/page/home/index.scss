@@ -78,6 +78,7 @@ textarea:hover {
   display: flex;
   padding: 15px 0px 15px 15px;
   background-color: rgba(243, 246, 247, 1);
+  width: calc(100% - 253px);
 
   .homeContentRight {
     overflow-y: auto;
@@ -97,7 +98,7 @@ textarea:hover {
   }
 
   .box_642X1 {
-    width: calc(100% - 30px);
+    margin-right: 30px;
     min-height: 116px;
     color: rgba(80, 80, 80, 1);
     background-color: rgba(255, 255, 255, 1);
@@ -112,7 +113,12 @@ textarea:hover {
     .languageContent {
       display: flex;
       align-items: center;
+      word-break: break-word;
     }
+
+    //.box_642X1_list::-webkit-scrollbar{
+    //  display: none;
+    //}
 
     .box_642X1_list {
       flex: 1;
@@ -120,11 +126,10 @@ textarea:hover {
       flex-direction: row;
       overflow-x: auto;
 
+
       .text_825X1 {
         width: 115px;
         height: 50px;
-        left: 318px;
-        top: 39px;
         color: rgba(80, 80, 80, 1);
         font-size: 14px;
         line-height: 150%;
@@ -133,8 +138,9 @@ textarea:hover {
         align-items: center;
         font-weight: bold;
         flex-direction: column;
+        flex-shrink: 0; //设置压缩比，当压缩比为0不被压缩
 
-        .box_823X1{
+        .box_823X1 {
           width: 18px;
           height: 3px;
           color: rgba(56, 56, 56, 1);
@@ -147,7 +153,7 @@ textarea:hover {
         }
       }
 
-      .text_824X1{
+      .text_824X1 {
         width: 115px;
         height: 50px;
         display: flex;
@@ -157,7 +163,30 @@ textarea:hover {
         font-size: 14px;
         line-height: 150%;
         text-align: center;
+        flex-shrink: 0;
       }
     }
   }
+}
+
+.introduce {
+  height: 150px;
+  display: block;
+  width: 100%;
+  //height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  //caret-color:red;//光标颜色设置
+  //:hover {
+  //  border: 1px solid #ced4da;
+  //}
 }

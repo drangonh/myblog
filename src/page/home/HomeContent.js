@@ -137,7 +137,7 @@ class HomeContent extends React.Component {
                     <div className={"box_642X1_list"}>
                         {
                             commonLeft.data.map((item) => {
-                                if (selType && selType.languageId == item.languageId || !selType.languageId) {
+                                if (selType && selType.languageId == item.languageId) {
                                     return (
                                         <div
                                             onClick={() => this.changeSelType(item)}
@@ -150,8 +150,11 @@ class HomeContent extends React.Component {
                                 }
 
                                 return (
-                                    <div className={"text_824X1"}>
-                                        前端
+                                    <div
+                                        key={item.languageId}
+                                        onClick={() => this.changeSelType(item)}
+                                        className={"text_824X1"}>
+                                        {item.languageTitle}
                                     </div>
                                 )
 
