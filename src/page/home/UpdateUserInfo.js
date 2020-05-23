@@ -2,6 +2,7 @@ import React from 'react';
 import "./UpdateUserInfo.scss"
 import {post, get} from "../../axios"
 import {inject, observer} from "mobx-react";
+import {uploadImage} from "../../utils/oss";
 
 // 观察者
 @inject('header')
@@ -12,69 +13,56 @@ class UpdateUserInfo extends React.Component {
         super(props)
         this.state = {
             login: true,//为true时代表登录，否则为注册
+            photo: ""
         }
     }
 
-    login = () => {
-        const params = {userName: this.name.value, passWord: this.pwd.value};
-
-        get("user/logout", {}).then(res => {
-
-            post("user/login", params).then(res => {
-                console.log("登录测试::", res)
-                if (res.data) {
-                    const {header} = this.props;
-                    header.changeInfo(res.data);
-                    this.props.history.push("/home");
-                    localStorage.setItem("userInfo", JSON.stringify(res.data))
-                }
-            });
-        })
-
+    addImage = () => {
+        this.input.click();//触发input：file的click事件，
     };
 
-    register = () => {
-        const params = {
-            Username: this.name.value,
-            Password: this.pwd.value,
-            ConfirmPassword: this.confirmPwd.value
-        };
+    handleImageChange = async (e) => {//处理图片
+        const file = e.target.files[0];
 
-        post("user/register", params).then(res => {
+        uploadImage(file, file.name, (res) => {
             console.log(res)
-            if (res.data) {
-                const {header} = this.props;
-                header.changeInfo(res.data);
-                this.props.history.push("/home");
-                localStorage.setItem("userInfo", JSON.stringify(res.data))
-            }
-        });
-    };
-
-    changeState = () => {
-        this.setState((preState, props) => {
-                return {
-                    login: !this.state.login
-                }
-            }
-        )
+            this.setState({
+                photo: res.url
+            })
+        })
     };
 
     render() {
-        const {login} = this.state;
+        const {photo} = this.state;
         return (
             <div id={"updateInfo"}>
-
                 <div className={"box_6747X3"}>
 
                     <p className={"text_6746X3"}>
                         请填写基本信息
                     </p>
 
-                    <img
-                        className={"default"}
-                        src={require("../../static/image/defualt.jpeg")}
-                    />
+                    <div onClick={this.addImage}>
+                        <input
+                            style={{
+                                display: 'none'
+                            }}
+                            ref={(el) => {
+                                this.input = el
+                            }}
+                            type='file'
+                            accept='image/*'
+                            onChange={this.handleImageChange}
+                        />
+
+                        <img
+                            className={"default"}
+                            src={photo.length != 0 ?
+                                photo
+                                : require("../../static/image/defualt.jpeg")
+                            }
+                        />
+                    </div>
 
                     <div className={"text_12X1"}>
                         <input

@@ -20,14 +20,14 @@ class CommonLeft extends React.Component {
     }
 
     /*方法说明
-     *@method changeInfo
+     *@method changeInfo:更新用户信息
      *@for CommonLeft
      *@param nil
      *@return nil
     */
     changeInfo = () => {
         this.props.history.push({
-            pathname: "/login",
+            pathname: "/updateInfo",
         });
     }
 
@@ -64,7 +64,9 @@ class CommonLeft extends React.Component {
 
 
                     <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverBottom}>
-                        <img className={"photo"}/>
+                        <img
+                            src={require("../../static/image/defualt.jpeg")}
+                            className={"photo"}/>
                     </OverlayTrigger>
 
                     <h4>Web Bolg</h4>
