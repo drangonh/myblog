@@ -46,7 +46,7 @@ class HomeContent extends React.Component {
             this.setState({
                 list: res.data,
                 selType: res.data.length != 0 ? res.data[0] : {},
-                languageId: res.data[0].languageId
+                languageId: res.data.length != 0 ? res.data[0].languageId : 0
             })
 
             const {commonLeft} = this.props;

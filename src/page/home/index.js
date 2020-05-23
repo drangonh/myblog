@@ -32,7 +32,7 @@ class App extends BaseComponent {
     }
 
     componentDidMount() {
-        this.getList()
+        // this.getList()
     }
 
     getList = async () => {
@@ -106,7 +106,7 @@ class App extends BaseComponent {
 
                 <div className={"homeContent"}>
 
-                    <CommonLeft/>
+                    <CommonLeft {...this.props}/>
 
                     <HomeContent
                         types={list}

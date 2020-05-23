@@ -1,19 +1,71 @@
 import React from 'react';
 import "./CommonLeft.scss"
+import {OverlayTrigger, Popover} from "react-bootstrap";
+import {get} from "../../axios";
 
 class CommonLeft extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            show: true,
+            target: null
+        }
+
+        this.popoverBottom = (
+            <Popover id="popover-positioned-bottom" className={"loginImage"} title="底部弹出">
+                <div className={"box_xx200"} onClick={this.changeInfo}>修改资料</div>
+                <div className={"box_xx200"} onClick={this.logout}>退出登录</div>
+            </Popover>
+        );
     }
+
+    /*方法说明
+     *@method changeInfo
+     *@for CommonLeft
+     *@param nil
+     *@return nil
+    */
+    changeInfo = () => {
+        this.props.history.push({
+            pathname: "/login",
+        });
+    }
+
+    /*方法说明
+     *@method logout
+     *@for CommonLeft
+     *@param nil
+     *@return nil
+    */
+    logout = () => {
+        get("user/logout", {}).then(res => {
+            this.props.history.push({
+                pathname: "/login",
+            });
+        })
+
+    }
+
+    handleClick = e => {
+        console.log(e.target)
+        this.setState({
+            target: e.target,
+            show: !this.state.show
+        });
+    };
 
     render() {
         return (
             <div id={"commonLeft"}>
 
-                <div className={"box_278X1"}>
-                    <div className={"photo"}>
+                <div
+                    onClick={this.handleClick}
+                    className={"box_278X1"}>
 
-                    </div>
+
+                    <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverBottom}>
+                        <img className={"photo"}/>
+                    </OverlayTrigger>
 
                     <h4>Web Bolg</h4>
 

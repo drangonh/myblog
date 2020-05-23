@@ -18,18 +18,16 @@ class index extends React.Component {
     login = () => {
         const params = {userName: this.name.value, passWord: this.pwd.value};
 
-        get("user/logout", {}).then(res => {
 
-            post("user/login", params).then(res => {
-                console.log("登录测试::", res)
-                if (res.data) {
-                    const {header} = this.props;
-                    header.changeInfo(res.data);
-                    this.props.history.push("/home");
-                    localStorage.setItem("userInfo", JSON.stringify(res.data))
-                }
-            });
-        })
+        post("user/login", params).then(res => {
+            console.log("登录测试::", res)
+            if (res.data) {
+                const {header} = this.props;
+                header.changeInfo(res.data);
+                this.props.history.push("/home");
+                localStorage.setItem("userInfo", JSON.stringify(res.data))
+            }
+        });
 
     };
 
