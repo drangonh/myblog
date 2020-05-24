@@ -41,20 +41,17 @@ class index extends React.Component {
         };
 
         post("user/register", params).then(res => {
-            console.log(res)
             if (res.data) {
-                const {header} = this.props;
-                header.changeInfo(res.data);
-                this.props.history.push("/home");
-                localStorage.setItem("userInfo", JSON.stringify(res.data))
+                this.props.history.push("/UpdateUserInfo");
             }
         });
     };
 
-    changeState = () => {
+    changeState = (res) => {
+        console.log(res)
         this.setState((preState, props) => {
                 return {
-                    login: !this.state.login
+                    login: res
                 }
             }
         )
@@ -72,12 +69,17 @@ class index extends React.Component {
 
                     {/*左*/}
                     <div className={"wrapper_2X1 uac"}>
+
                         <div className={"wrapper_2X2 "}>
-                            <div className={"wrapper_2X3 uac_jc"}>
+                            <div
+                                onClick={() => this.changeState(true)}
+                                className={login ? "wrapper_2X3 uac_jc" : "wrapper_2X4 uac_jc"}>
                                 密码登录
                             </div>
 
-                            <div className={"wrapper_2X4 uac_jc"}>
+                            <div
+                                onClick={() => this.changeState(false)}
+                                className={login ? "wrapper_2X4 uac_jc" : "wrapper_2X3 uac_jc"}>
                                 注册
                             </div>
                         </div>
@@ -100,7 +102,20 @@ class index extends React.Component {
                             />
                         </div>
 
-                        <div className={"box_202"}>
+                        <div
+                            hidden={login}
+                            className={"text_12X1 margin-top28"}>
+                            <input
+                                placeholder={"请再次输入密码"}
+                                type={"password"}
+                                className={"editValue"}
+                                ref={ref => this.confirmPwd = ref}
+                            />
+                        </div>
+
+                        <div
+                            hidden={!login}
+                            className={"box_202"}>
                             <div className={"text_17X1"}>
                                 忘记密码?
                             </div>
@@ -109,7 +124,7 @@ class index extends React.Component {
                         <div
                             onClick={login ? this.login : this.register}
                             className={"text_18X1 uac_jc"}>
-                            登 录
+                            {login ? "登 录" : "注 册"}
                         </div>
                     </div>
 

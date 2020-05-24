@@ -33,7 +33,7 @@
     //左边
     .wrapper_2X1 {
       width: 420px;
-      height: 300px;
+      min-height: 300px;
       border-right: rgba(229, 229, 229, 1) 1px solid;
       display: flex;
       flex-direction: column;
@@ -69,6 +69,7 @@
         text-align: left;
         margin-top: 40px;
         border-bottom: rgba(229, 229, 229, 1) 1px solid;
+        flex-shrink: 0;
 
         .editValue {
           //去掉默认样式
@@ -144,16 +145,16 @@
         width: 100%;
         justify-content: center;
 
-        .wechat{
+        .wechat {
           width: 20px;
           height: 16px;
         }
 
-        .margin-right20{
+        .margin-right20 {
           margin-right: 20px;
         }
 
-        .qq{
+        .qq {
           width: 14px;
           height: 16px;
         }
