@@ -3,6 +3,7 @@
  * @date 2020/5/23 0023 上午 11:35
  */
 import OSS from "ali-oss"
+import {get} from "../axios";
 
 // const client = new OSS({
 //     region: 'https://oss-cn-shanghai.aliyuncs.com',
@@ -31,20 +32,27 @@ import OSS from "ali-oss"
  *@return {返回值类型} 返回值说明
 */
 export async function uploadImage(data, file, func, err) {
-    // 用户登录名称 drag_user@1636788576661126.onaliyun.com
-    // AccessKey ID LTAI4G6gFSbu7JV7nvSkD4j3
-    // AccessKey Secret U8YEYlGYNxvcwA29Gae315kFaINDPT
 
-    // 用户登录名称 drag_user@1636788576661126.onaliyun.com
-    // AccessKey ID LTAI4G6gFSbu7JV7nvSkD4j3
-    // AccessKey Secret U8YEYlGYNxvcwA29Gae315kFaINDPT
+    // const client = new OSS({
+    //     region: 'oss-cn-shanghai',
+    //     accessKeyId: 'LTAI4G6gFSbu7JV7nvSkD4j3',
+    //     accessKeySecret: 'U8YEYlGYNxvcwA29Gae315kFaINDPT',
+    //     bucket: 'blogdrag'
+    // });
 
-    const client = new OSS({
-        region: 'oss-cn-shanghai',
-        accessKeyId: 'LTAI4G6gFSbu7JV7nvSkD4j3',
-        accessKeySecret: 'U8YEYlGYNxvcwA29Gae315kFaINDPT',
-        bucket: 'blogdrag'
-    });
+    let client
+
+    let res = await get("oss/ossInfo", {})
+    if (res && res.data) {
+        const data = res.data;
+        client = new OSS({
+            region: data.endpoint,
+            accessKeyId: data.accessKeyId,
+            accessKeySecret: data.accessKeySecret,
+            bucket: data.bucketName
+        });
+    }
+
     const PhotoPath = "photo/"
     // 支持File对象、Blob数据、以及OSS Buffer。
     // or const data = new Blob('content');
