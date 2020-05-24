@@ -17,12 +17,13 @@ import {inject, observer} from "mobx-react";
 class HomeContent extends React.Component {
     constructor(props) {
         super(props);
+        const {types} = this.props;
         this.state = {
             list: [],
             modalShow: false,
-            languageId: "",
+            languageId: types.length != 0 ? types[0].languageId : 0,
             count: 0,//文章总数
-            selType: {}
+            selType: types.length != 0 ? types[0] : {},
         };
 
         this.page = 1;
@@ -30,28 +31,11 @@ class HomeContent extends React.Component {
     }
 
     componentDidMount() {
-        this.getCategoryList()
         this.getList()
     }
 
     componentWillUnmount() {
         this.delItem = {}
-    }
-
-    getCategoryList = async () => {
-        const params = {};
-        const res = await get("language/getLanguageList", params);
-
-        if (res.data) {
-            this.setState({
-                list: res.data,
-                selType: res.data.length != 0 ? res.data[0] : {},
-                languageId: res.data.length != 0 ? res.data[0].languageId : 0
-            })
-
-            const {commonLeft} = this.props;
-            commonLeft.changeInfo(res.data);
-        }
     }
 
     getList = async () => {

@@ -113,17 +113,19 @@ class App extends BaseComponent {
         return (
             <div className="wrap">
 
-                {/*<Header {...this.props}/>*/}
-
                 <div className={"homeContent"}>
 
                     <CommonLeft {...this.props}/>
 
-                    <HomeContent
-                        types={list}
-                        history={this.props.history}
-                        languageContent={selType.languageContent}
-                        languageId={selType.languageId}/>
+                    {
+                        list.length?
+                            <HomeContent
+                                types={list}
+                                history={this.props.history}
+                                languageContent={selType.languageContent}
+                                languageId={selType.languageId}/>
+                                :null
+                    }
 
                 </div>
 

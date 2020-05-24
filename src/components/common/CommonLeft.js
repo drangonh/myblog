@@ -59,7 +59,6 @@ class CommonLeft extends React.Component {
 
     render() {
         const {header: {person}} = this.props
-        console.log("数据：：：：", person, person && person.uid)
         return (
             <div id={"commonLeft"}>
 
