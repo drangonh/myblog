@@ -1,7 +1,7 @@
 import React from 'react';
 import './SuspendBtn.scss';
 import PropTypes from "prop-types"
-import {Button, OverlayTrigger, Popover,Modal} from 'react-bootstrap';
+import {Button, OverlayTrigger, Popover, Modal} from 'react-bootstrap';
 
 class SuspendBtn extends React.Component {
     static  propTypes = {
@@ -12,7 +12,7 @@ class SuspendBtn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "开门"
+            title: "编辑"
         };
         this.popoverLeft = (
             <Popover id="popover-positioned-left" className={"leftPopover"} title="">
@@ -35,7 +35,7 @@ class SuspendBtn extends React.Component {
     suspendBtn = () => {
         this.setState((preState, props) => {
             return {
-                title: preState.title == "开门" ? "关门" : "开门"
+                title: preState.title == "编辑" ? "收起" : "编辑"
             }
         });
     }

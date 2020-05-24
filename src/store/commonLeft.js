@@ -5,7 +5,6 @@ class CommonLeftStore {
 
     @action
     changeInfo = obj => {
-        console.log("獲取分類：：：：", obj)
         this.data = obj;
     };
 

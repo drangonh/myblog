@@ -32,7 +32,7 @@ class App extends BaseComponent {
     }
 
     componentDidMount() {
-        // this.getList()
+        this.getList()
     }
 
     getList = async () => {
@@ -59,7 +59,7 @@ class App extends BaseComponent {
     commit = async () => {
         const {header: {person}} = this.props;
 
-        if (person.info) {
+        if (person) {
             const params = {
                 languageContent: this.state.content,
                 languageTitle: this.state.title,
@@ -69,6 +69,8 @@ class App extends BaseComponent {
             if (res.data && res.data.result) {
                 this.suspendBtn()
                 this.getList()
+            } else {
+                alert(res.err)
             }
         } else {
             this.props.history.push("/login");
@@ -88,6 +90,15 @@ class App extends BaseComponent {
     };
 
     publish = () => {
+        console.log(this.state.list)
+        if (this.state.list.length == 0) {
+
+            this.setState({
+                showModal: !this.state.showModal
+            }, () => this.commit())
+
+            return
+        }
         this.props.history.push({
             pathname: "/markdown",
             state: {

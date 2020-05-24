@@ -5,18 +5,15 @@ class HeaderStore {
 
     @action
     changeInfo = obj => {
-        this.person.userName = obj.userName;
-        this.person.img = require("../static/image/person.png");
-        this.person.info = obj;
+        console.log(obj)
+        this.person = obj;
     };
 
     constructor() {
         let info = JSON.parse(localStorage.getItem("userInfo"));
-        this.person = {
-            userName: info ? info.userName : "登录",
-            img: require("../static/image/person.png"),
-            info: info ? info : {}
-        }
+        console.log(info)
+        this.person = info ? info : null
+
     }
 }
 

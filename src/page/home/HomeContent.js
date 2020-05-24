@@ -132,45 +132,46 @@ class HomeContent extends React.Component {
         return (
             <div className={"homeContainer"}>
 
-                <div className={"box_642X1"}>
+                {commonLeft.data.length > 0 ?
+                    <div className={"box_642X1"}>
+                        <div className={"box_642X1_list"}>
+                            {
+                                commonLeft.data.map((item) => {
+                                    if (selType && selType.languageId == item.languageId) {
+                                        return (
+                                            <div
+                                                onClick={() => this.changeSelType(item)}
+                                                key={item.languageId}
+                                                className={"text_825X1"}>
+                                                {item.languageTitle}
+                                                <div className={"box_823X1"}/>
+                                            </div>
+                                        )
+                                    }
 
-                    <div className={"box_642X1_list"}>
-                        {
-                            commonLeft.data.map((item) => {
-                                if (selType && selType.languageId == item.languageId) {
                                     return (
                                         <div
-                                            onClick={() => this.changeSelType(item)}
                                             key={item.languageId}
-                                            className={"text_825X1"}>
+                                            onClick={() => this.changeSelType(item)}
+                                            className={"text_824X1"}>
                                             {item.languageTitle}
-                                            <div className={"box_823X1"}/>
                                         </div>
                                     )
-                                }
 
-                                return (
-                                    <div
-                                        key={item.languageId}
-                                        onClick={() => this.changeSelType(item)}
-                                        className={"text_824X1"}>
-                                        {item.languageTitle}
-                                    </div>
-                                )
+                                })
+                            }
 
-                            })
-                        }
+                        </div>
 
+
+                        <div className={"languageContent"}>
+                            简介： {selType.languageContent}
+                        </div>
                     </div>
-
-                    <div className={"languageContent"}>
-                        简介： {selType.languageContent}
-                    </div>
-                </div>
+                    : null}
 
 
                 <div className={"homeContentRight"}>
-
 
                     {
                         list.map((item, index) => {

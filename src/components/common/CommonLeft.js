@@ -2,7 +2,10 @@ import React from 'react';
 import "./CommonLeft.scss"
 import {OverlayTrigger, Popover} from "react-bootstrap";
 import {get} from "../../axios";
+import {inject, observer} from "mobx-react";
 
+@inject('header')
+@observer
 class CommonLeft extends React.Component {
     constructor(props) {
         super(props);
@@ -55,6 +58,8 @@ class CommonLeft extends React.Component {
     };
 
     render() {
+        const {header: {person}} = this.props
+        console.log("数据：：：：", person, person && person.uid)
         return (
             <div id={"commonLeft"}>
 
@@ -65,17 +70,18 @@ class CommonLeft extends React.Component {
 
                     <OverlayTrigger trigger="click" placement="bottom" overlay={this.popoverBottom}>
                         <img
-                            src={require("../../static/image/defualt.jpeg")}
+                            src={person && person.uid && person.avatar ? person.avatar : require("../../static/image/defualt.jpeg")}
                             className={"photo"}/>
                     </OverlayTrigger>
 
-                    <h4>Web Bolg</h4>
+                    <h4>
+                        {person && person.uid ?
+                            person.nickName ? person.nickName : "请修改个人资料"
+                            : "请登录"}
+                    </h4>
 
                     <p>
-                        Only the harvest，to test the significance of the work；
-                        only the contribution，
-                        the value of the square
-                        can be measured。
+                        {person && person.uid ? person.description : ""}
                     </p>
                 </div>
 

@@ -32,6 +32,29 @@ class UpdateUserInfo extends React.Component {
         })
     };
 
+    upload = async () => {
+        const params = {
+            avatar: this.state.photo,
+            email: this.email.value,
+            nickName: this.nickName.value,
+            description: this.info.value
+        }
+        console.log(params)
+        const res = await post("/profile/editUserProfile", params)
+
+        console.log(res)
+        if (res.data) {
+            const {header} = this.props;
+
+            //清除input值
+            this.email.value = ""
+
+            header.changeInfo(res.data);
+            this.props.history.push("/home");
+            localStorage.setItem("userInfo", JSON.stringify(res.data))
+        }
+    }
+
     render() {
         const {photo} = this.state;
         return (
@@ -69,6 +92,7 @@ class UpdateUserInfo extends React.Component {
                             placeholder={"请输入昵称"}
                             type={"text"}
                             className={"editValue"}
+                            ref={v => this.nickName = v}
                         />
                     </div>
 
@@ -77,6 +101,7 @@ class UpdateUserInfo extends React.Component {
                             placeholder={"请输入邮箱"}
                             type={"text"}
                             className={"editValue"}
+                            ref={v => this.email = v}
                         />
                     </div>
 
@@ -85,10 +110,13 @@ class UpdateUserInfo extends React.Component {
                             placeholder={"请输入个人介绍"}
                             type={"text"}
                             className={"editValue"}
+                            ref={v => this.info = v}
                         />
                     </div>
 
-                    <div className={"text_18X1 uac_jc"}>
+                    <div
+                        onClick={this.upload}
+                        className={"text_18X1 uac_jc"}>
                         完 成
                     </div>
                 </div>
