@@ -7,14 +7,26 @@ import {uploadImage} from "../../utils/oss";
 // 观察者
 @inject('header')
 @observer
-
 class UpdateUserInfo extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             login: true,//为true时代表登录，否则为注册
-            photo: ""
+            photo: "",
+            email: '',
+            nickName: "",
+            description: ""
         }
+    }
+
+    componentDidMount() {
+        const {header: {person}} = this.props;
+        this.setState({
+            photo: person.avatar,
+            email: person.email,
+            nickName: person.nickName,
+            description: person.description
+        })
     }
 
     addImage = () => {
@@ -35,9 +47,9 @@ class UpdateUserInfo extends React.Component {
     upload = async () => {
         const params = {
             avatar: this.state.photo,
-            email: this.email.value,
-            nickName: this.nickName.value,
-            description: this.info.value
+            email: this.state.email,
+            nickName: this.state.nickName,
+            description: this.state.description
         }
         console.log(params)
         const res = await post("/profile/editUserProfile", params)
@@ -93,6 +105,12 @@ class UpdateUserInfo extends React.Component {
                             type={"text"}
                             className={"editValue"}
                             ref={v => this.nickName = v}
+                            value={this.state.nickName}
+                            onChange={(e) => {
+                                this.setState({
+                                    nickName: e.target.value
+                                })
+                            }}
                         />
                     </div>
 
@@ -102,6 +120,12 @@ class UpdateUserInfo extends React.Component {
                             type={"text"}
                             className={"editValue"}
                             ref={v => this.email = v}
+                            value={this.state.email}
+                            onChange={(e) => {
+                                this.setState({
+                                    email: e.target.value
+                                })
+                            }}
                         />
                     </div>
 
@@ -111,6 +135,12 @@ class UpdateUserInfo extends React.Component {
                             type={"text"}
                             className={"editValue"}
                             ref={v => this.info = v}
+                            value={this.state.description}
+                            onChange={(e) => {
+                                this.setState({
+                                    description: e.target.value
+                                })
+                            }}
                         />
                     </div>
 
