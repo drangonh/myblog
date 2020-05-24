@@ -83,13 +83,8 @@ class HomeContent extends React.Component {
     //跳转到文章详情页
     openPage = (item, edit) => {
         this.props.history.push({
-            pathname: "/markdown",
-            state: {
-                list: this.props.types,
-                publish: edit ? true : false, //编辑文章是显示发布样式
-                item: item,
-                edit: edit
-            }
+            pathname: "/articleDetail",
+            search: "?languageId=" + item.languageId + "&contentId=" + item.contentId
         });
     };
 

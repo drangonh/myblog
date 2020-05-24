@@ -30,13 +30,13 @@
       overflow-y: auto;
 
       .text_388X1 {
-        width: 168px;
+        min-width: 168px;
         height: 42px;
         margin-top: 29px;
         color: rgba(80, 80, 80, 1);
         font-size: 28px;
         line-height: 150%;
-        text-align: left;
+        text-align: center;
       }
 
       // 文章标签
@@ -55,16 +55,6 @@
         }
       }
 
-    }
-
-    //文章标题
-    .text_388X1 {
-      width: 168px;
-      height: 42px;
-      color: rgba(80, 80, 80, 1);
-      font-size: 28px;
-      line-height: 150%;
-      text-align: left;
     }
 
     //文章内容

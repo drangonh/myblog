@@ -9,6 +9,8 @@ import BaseComponent from "../../components/common/BaseComponent";
 import {post, get} from "../../axios";
 import {inject, observer} from "mobx-react";
 import CommonLeft from "../../components/common/CommonLeft";
+import Markdown from "react-markdown";
+import toc from "remark-toc";
 
 // 观察者
 @inject('header')
@@ -17,96 +19,50 @@ class App extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            showModal: false,
-            title: "",
-            content: "",
-            list: [],
-            selType: {}
+            detail: {}
         }
+
     }
 
     componentDidMount() {
-        this.getList()
+        this.getDetail()
     }
 
-    getList = async () => {
-        const {header: {person}} = this.props;
+    getDetail = async () => {
+        const data = this.props.history.location.search  //地址栏截取
+        const paramsString = data.substring(1)
+        console.log(paramsString)
 
-        const params = {};
-        const res = await get("language/getLanguageList", params);
+        const searchParams = new URLSearchParams(paramsString)
+        const languageId = searchParams.get('languageId')
+        const contentId = searchParams.get('contentId')
 
-        if (res.data) {
+        const params = {
+            languageId: languageId,
+            contentId: contentId,
+        };
+
+        const res = await get("markdownStore/getArticleDetail", params)
+        console.log(res.data);
+
+
+        if (res && res.data) {
             this.setState({
-                list: res.data,
-                selType: res.data.length != 0 ? res.data[0] : {}
+                detail: res.data,
             })
         }
     };
 
-    suspendBtn = () => {
-        this.setState({
-            showModal: !this.state.showModal
-        })
-    };
-
-    commit = async () => {
-        const {header: {person}} = this.props;
-
-        if (person.info) {
-            const params = {
-                languageContent: this.state.content,
-                languageTitle: this.state.title,
-            };
-
-            const res = await post("language/editLanguage", params)
-            if (res.data && res.data.result) {
-                this.suspendBtn()
-                this.getList()
-            }
-        } else {
-            this.props.history.push("/login");
-        }
-    };
-
-    handleChange = (p1) => {
-        this.setState({
-            title: p1.target.value
-        })
-    };
-
-    changeContent = (p1) => {
-        this.setState({
-            content: p1.target.value
-        })
-    };
-
-    publish = () => {
-        this.props.history.push({
-            pathname: "/markdown",
-            state: {
-                list: this.state.list,
-                publish: true
-            }
-        });
-    };
-
-    //改变选中的语言
-    changeSelType = (item) => {
-        this.setState({
-            selType: item
-        })
-    };
-
     render() {
-        const {list, selType} = this.state;
+        const {detail} = this.state;
         return (
             <div id="articleDetail">
-                <CommonLeft/>
+                <CommonLeft {...this.props}/>
 
                 <div className={"right"}>
                     <div className={"box_387X1"}>
                         <div className={"text_388X1"}>
-                            标题标题标题
+                            {detail.storeTitle}
                         </div>
 
 
@@ -117,23 +73,14 @@ class App extends BaseComponent {
                         </div>
 
                         <div className={"text_393X1"}>
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            。。。。。。
+                            {/*{detail.content}*/}
+                            <Markdown
+                                className="result"
+                                source={detail.content}
+                                skipHtml={this.state.htmlMode === 'skip'}
+                                escapeHtml={this.state.htmlMode === 'escape'}
+                                plugins={[toc]}
+                            />
                         </div>
 
                         <div className={"box_201"}>
