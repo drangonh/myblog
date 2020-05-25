@@ -117,10 +117,10 @@ class CommonLeft extends React.Component {
                         <div className={"text_269X1"}>分类</div>
                     </div>
 
-                    <div className={"wrapper_118X1"}>
-                        <div className={"text_268X1"}>1</div>
-                        <div className={"text_269X1"}>Tags</div>
-                    </div>
+                    {/*<div className={"wrapper_118X1"}>*/}
+                    {/*    <div className={"text_268X1"}>1</div>*/}
+                    {/*    <div className={"text_269X1"}>Tags</div>*/}
+                    {/*</div>*/}
                 </div>
 
             </div>
