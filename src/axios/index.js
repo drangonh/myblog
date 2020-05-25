@@ -11,7 +11,7 @@ const production = "https://www.dontheway.com:8880/blog/";
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
-    axios.defaults.baseURL = production;
+    axios.defaults.baseURL = development;
 } else if (process.env.NODE_ENV == 'debug') {
     axios.defaults.baseURL = '';
 } else if (process.env.NODE_ENV == 'production') {

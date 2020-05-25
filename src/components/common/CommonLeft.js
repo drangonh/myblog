@@ -11,7 +11,9 @@ class CommonLeft extends React.Component {
         super(props);
         this.state = {
             show: true,
-            target: null
+            target: null,
+            art: 0,//文章数量
+            lag: 0,//分类数量
         }
 
         this.popoverBottom = (
@@ -20,6 +22,25 @@ class CommonLeft extends React.Component {
                 <div className={"box_xx200"} onClick={this.logout}>退出登录</div>
             </Popover>
         );
+    }
+
+    componentDidMount() {
+        this.getLagAndArtCnt()
+    }
+
+    /*方法说明
+     *@method getLagAndArtCnt
+     *@for CommonLeft
+    */
+    async getLagAndArtCnt() {
+        const res = await get("user/getArtAndCatCnt", {})
+        console.log(res)
+        if (res.data) {
+            this.setState({
+                art: res.data.article,//文章数量
+                lag: res.data.language
+            })
+        }
     }
 
     /*方法说明
@@ -59,6 +80,7 @@ class CommonLeft extends React.Component {
 
     render() {
         const {header: {person}} = this.props
+        const {lag, art} = this.state;
         return (
             <div id={"commonLeft"}>
 
@@ -86,12 +108,12 @@ class CommonLeft extends React.Component {
 
                 <div className={"box_275X1"}>
                     <div className={"wrapper_118X1"}>
-                        <div className={"text_268X1"}>1</div>
+                        <div className={"text_268X1"}>{art}</div>
                         <div className={"text_269X1"}>文章</div>
                     </div>
 
                     <div className={"wrapper_118X1"}>
-                        <div className={"text_268X1"}>1</div>
+                        <div className={"text_268X1"}>{lag}</div>
                         <div className={"text_269X1"}>分类</div>
                     </div>
 
