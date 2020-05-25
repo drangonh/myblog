@@ -63,6 +63,8 @@ class CommonLeft extends React.Component {
     */
     logout = () => {
         get("user/logout", {}).then(res => {
+            const {header} = this.props;
+            header.changeInfo(null)
             this.props.history.push({
                 pathname: "/login",
             });

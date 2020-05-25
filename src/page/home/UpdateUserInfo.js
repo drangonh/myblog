@@ -20,13 +20,18 @@ class UpdateUserInfo extends React.Component {
     }
 
     componentDidMount() {
+
         const {header: {person}} = this.props;
-        this.setState({
-            photo: person.avatar,
-            email: person.email,
-            nickName: person.nickName,
-            description: person.description
-        })
+
+        if (person) {
+            this.setState({
+                photo: person.avatar,
+                email: person.email,
+                nickName: person.nickName,
+                description: person.description
+            })
+        }
+
     }
 
     addImage = () => {
@@ -45,11 +50,13 @@ class UpdateUserInfo extends React.Component {
     };
 
     upload = async () => {
+        const {header: {person}} = this.props;
         const params = {
             avatar: this.state.photo,
             email: this.state.email,
             nickName: this.state.nickName,
-            description: this.state.description
+            description: this.state.description,
+            uid: person && person.uid
         }
         console.log(params)
         const res = await post("/profile/editUserProfile", params)

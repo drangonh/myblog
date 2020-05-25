@@ -13,6 +13,9 @@ class index extends React.Component {
         this.state = {
             login: true,//为true时代表登录，否则为注册
         }
+
+        const {header} = this.props;
+        console.log(header)
     }
 
     login = () => {
@@ -40,6 +43,15 @@ class index extends React.Component {
         post("user/register", params).then(res => {
 
             if (res.data) {
+                const {header} = this.props;
+                header.changeInfo({
+                    uid: res.data.userId,
+                    avatar: "",
+                    email: "",
+                    nickName: "",
+                    description: ""
+                });
+
                 this.props.history.push("/updateInfo");
             }
         });
