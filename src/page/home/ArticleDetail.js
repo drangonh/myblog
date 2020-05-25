@@ -67,9 +67,7 @@ class App extends BaseComponent {
 
 
                         <div className={"box_200"}>
-                            <div className={"text_420X1"}>Javascript</div>
-                            <div className={"text_420X1"}>Javascript</div>
-                            <div className={"text_420X1"}>Javascript</div>
+                            <div className={"text_420X1"}>{detail.languageTitle}</div>
                         </div>
 
                         <div className={"text_393X1"}>
