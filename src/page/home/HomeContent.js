@@ -88,6 +88,24 @@ class HomeContent extends React.Component {
         });
     };
 
+    /*方法说明
+     *@method editPage 编辑文章
+     *@for HomeContent
+    */
+    editPage = (item, edit, e) => {
+        this.props.history.push({
+            pathname: "/markdown",
+            state: {
+                list: this.props.types,
+                publish: edit ? true : false, //编辑文章是显示发布样式
+                item: item,
+                edit: edit
+            }
+        });
+
+        e && e.stopPropagation()
+    };
+
     // 删除文章
     delArticle = async (item, e) => {
         const params = {
@@ -165,7 +183,8 @@ class HomeContent extends React.Component {
                                     />
 
                                     <div className={"contentBotBn"}>
-                                        <div className={"editPage editBtn"} onClick={() => this.openPage(item, true)}>
+                                        <div className={"editPage editBtn"}
+                                             onClick={(e) => this.editPage(item, true, e)}>
                                             编辑
                                         </div>
 
