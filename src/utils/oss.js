@@ -39,7 +39,6 @@ export async function uploadImage(data, file, func, err, type) {
     // or const data = new Blob('content');
     // or const data = new OSS.Buffer('content'));
 
-
     try {
         let result = await client.put(PhotoPath + file, data);
         console.log("成功", result)
