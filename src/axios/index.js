@@ -7,7 +7,7 @@ import QS from 'qs';
 // import store from '../store/index'
 
 const development = "http://127.0.0.1:8888/blog/";
-const production = "https://www.dontheway.com:80/blog/";
+const production = "https://dontheway.com:880/blog/";
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {
